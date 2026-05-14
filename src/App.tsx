@@ -284,13 +284,13 @@ const Hero = () => {
           >
             <div className="flex flex-col gap-2 border-l-2 border-gold pl-6">
               <span className="text-gold text-xs font-black tracking-[0.4em] uppercase">Section 01: Hero Presentation</span>
-              <h1 className="text-6xl md:text-9xl font-heading font-black text-white leading-[0.8] tracking-tighter uppercase">
+              <h1 className="text-[clamp(3.5rem,15vw,10rem)] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase gold-glow">
                 Dua M<br />Residences
               </h1>
             </div>
             
             <div className="space-y-4">
-               <h2 className="text-xl md:text-3xl text-white/70 max-w-2xl font-bold font-heading uppercase tracking-tighter leading-tight">
+               <h2 className="text-lg md:text-[clamp(1.25rem,4vw,2.5rem)] text-white/70 max-w-2xl font-bold font-heading uppercase tracking-tighter leading-tight">
                   Modern Urban Living in Kuala Lumpur
                </h2>
                <p className="text-gold font-black uppercase tracking-[0.2em] text-xs">Professional Real Estate Marketing Portfolio</p>
@@ -357,12 +357,12 @@ const Hero = () => {
 const Section = ({ children, id, className, light = false, bgImage }: { children: React.ReactNode, id?: string, className?: string, light?: boolean, bgImage?: string }) => (
   <motion.section
     id={id}
-    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+    initial={{ opacity: 0, y: 50, scale: 0.98 }}
     whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    viewport={{ once: false, amount: 0.1, margin: "-100px" }}
+    viewport={{ once: false, amount: 0.05, margin: "0px" }}
     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
     className={cn(
-      "cinematic-section relative min-h-screen flex flex-col justify-center py-24 px-8 overflow-hidden",
+      "cinematic-section relative min-h-screen flex flex-col justify-center py-12 md:py-24 px-6 md:px-12 lg:px-20 overflow-hidden",
       !bgImage && (light ? "bg-[#0a0a0a]" : "bg-white"),
       className
     )}
@@ -375,9 +375,9 @@ const Section = ({ children, id, className, light = false, bgImage }: { children
   >
     {bgImage && (
       <>
-        <div className="absolute inset-0 z-0 bg-[#0a0a0a]/80 transition-all duration-1000" />
+        <div className="absolute inset-0 z-0 bg-[#0a0a0a]/85 transition-all duration-1000" />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)] pointer-events-none" />
         <div className="absolute inset-0 z-0 bg-gold/5 mix-blend-overlay pointer-events-none" />
       </>
     )}
@@ -401,23 +401,23 @@ const Section = ({ children, id, className, light = false, bgImage }: { children
 );
 
 const SectionHeader = ({ title, subtitle, light = false }: { title: string, subtitle?: string, light?: boolean }) => (
-  <div className="mb-16 space-y-6 flex flex-col">
+  <div className="mb-8 md:mb-16 space-y-4 md:space-y-6 flex flex-col">
     <motion.div
       initial={{ opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 1, delay: 0.2 }}
       viewport={{ once: false }}
-      className="space-y-6"
+      className="space-y-4 md:space-y-6"
     >
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4 md:gap-6">
         <motion.div 
           initial={{ width: 0 }}
           whileInView={{ width: 64 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="h-[2px] bg-gold shadow-[0_0_10px_rgba(197,160,89,0.5)]" 
+          className="h-[2px] bg-gold shadow-[0_0_10px_rgba(197,160,89,0.5)] hidden sm:block w-16" 
         />
         <h2 className={cn(
-          "text-5xl md:text-8xl font-heading font-black uppercase tracking-tighter leading-none gold-glow", 
+          "text-[clamp(2.5rem,8vw,6rem)] font-heading font-black uppercase tracking-tighter leading-[0.9] gold-glow", 
           light ? "text-white" : "text-black"
         )}>
           {title}
@@ -429,7 +429,7 @@ const SectionHeader = ({ title, subtitle, light = false }: { title: string, subt
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className={cn(
-            "text-lg md:text-xl font-medium tracking-tight max-w-4xl leading-relaxed uppercase tracking-tighter", 
+            "text-sm md:text-[clamp(1rem,1.5vw,1.25rem)] font-medium tracking-tight max-w-4xl leading-relaxed uppercase tracking-tighter", 
             light ? "text-white/60" : "text-gray-500"
           )}
         >
@@ -440,7 +440,17 @@ const SectionHeader = ({ title, subtitle, light = false }: { title: string, subt
   </div>
 );
 
+function clamp(min: number, max: number) {
+  return `clamp(${min}px, 4vw, ${max}px)`;
+}
+
 const PropertyOverview = () => {
+  const [appUrl, setAppUrl] = useState('');
+
+  useEffect(() => {
+    setAppUrl(window.location.href);
+  }, []);
+
   const specs = [
     { icon: MapPin, label: "Location", value: "Bukit Bintang" },
     { icon: Maximize2, label: "Area", value: "850 – 1,200 sqft" },
@@ -452,29 +462,38 @@ const PropertyOverview = () => {
       <SectionHeader title="Property Details" subtitle="High-demand serviced residences in Kuala Lumpur's strategic heart." />
       
       <div className="grid lg:grid-cols-12 gap-12 items-stretch">
-        <div className="lg:col-span-12 rounded-[3rem] overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] p-12 md:p-20 text-white flex flex-col md:flex-row justify-between items-center gap-16 group shadow-[0_40px_100px_rgba(0,0,0,0.2)] border border-white/5 relative">
+        <div className="lg:col-span-12 rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] p-8 md:p-16 lg:p-20 text-white flex flex-col lg:flex-row justify-between items-center gap-12 md:gap-16 group shadow-[0_40px_100px_rgba(0,0,0,0.2)] border border-white/5 relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(197,160,89,0.1)_0%,transparent_60%)] pointer-events-none" />
           
-          <div className="order-2 md:order-1 space-y-12 flex-1 relative z-10">
-            <div className="px-8 py-3 border border-gold/40 rounded-full inline-block text-[12px] text-gold font-black uppercase tracking-[0.25em] shadow-[0_0_20px_rgba(197,160,89,0.15)]">Section 02: Overview</div>
-            <h3 className="text-6xl md:text-8xl font-heading font-black leading-[0.8] tracking-tighter uppercase gold-glow">
+          <div className="order-2 lg:order-1 space-y-8 md:space-y-12 flex-1 relative z-10">
+            <div className="px-6 md:px-8 py-2 md:py-3 border border-gold/40 rounded-full inline-block text-[10px] md:text-[12px] text-gold font-black uppercase tracking-[0.25em] shadow-[0_0_20px_rgba(197,160,89,0.15)]">Section 02: Overview</div>
+            <h3 className="text-[clamp(2.5rem,8vw,5rem)] font-heading font-black leading-[0.9] tracking-tighter uppercase gold-glow">
               Modern<br /> <span className="text-gold">Urban Living</span>
             </h3>
-            <p className="text-white/50 max-w-lg font-medium text-lg leading-relaxed uppercase tracking-tighter">
+            <p className="text-white/50 max-w-lg font-medium text-sm md:text-lg leading-relaxed uppercase tracking-tighter">
               Designed for the high-performing professional. Strategic Bukit Bintang proximity ensures consistent rental yield and asset appreciation.
             </p>
             
-            <div className="flex flex-wrap gap-12 items-center border-t border-white/10 pt-12">
+            <div className="flex flex-wrap gap-8 md:gap-12 items-center border-t border-white/10 pt-8 md:pt-12">
               {specs.map((item, idx) => (
-                <div key={idx} className="flex flex-col gap-2">
-                  <span className="text-[11px] text-white/30 uppercase tracking-widest font-black">{item.label}</span>
-                  <span className="text-lg font-black font-heading uppercase text-white/90">{item.value}</span>
+                <div key={idx} className="flex flex-col gap-1 md:gap-2">
+                  <span className="text-[10px] md:text-[11px] text-white/30 uppercase tracking-widest font-black">{item.label}</span>
+                  <span className="text-base md:text-lg font-black font-heading uppercase text-white/90">{item.value}</span>
                 </div>
               ))}
+              <div className="hidden sm:flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10 shadow-inner group/qr">
+                 <div className="bg-white p-1 rounded-lg">
+                    {appUrl && <QRCodeCanvas value={appUrl} size={48} level="H" />}
+                 </div>
+                 <div className="space-y-1">
+                    <p className="text-[9px] text-gold font-black uppercase tracking-widest">Interactive</p>
+                    <p className="text-[10px] text-white/50 uppercase font-black">Scan to explore</p>
+                 </div>
+              </div>
             </div>
           </div>
 
-          <div className="order-1 md:order-2 flex-shrink-0 w-full md:w-[55%] aspect-[16/10] overflow-hidden rounded-[2.5rem] border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)]">
+          <div className="order-1 lg:order-2 flex-shrink-0 w-full lg:w-[50%] aspect-[16/10] overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)]">
             <motion.img 
               initial={{ scale: 1.1 }}
               whileInView={{ scale: 1 }}
@@ -555,29 +574,29 @@ const STPAnalysis = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: idx * 0.2 }}
-            className="bg-black/40 backdrop-blur-md border border-white/10 p-12 rounded-[3rem] group hover:border-gold/40 hover:bg-black/60 transition-all duration-700 card-glow-gold"
+            className="bg-black/40 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] group hover:border-gold/40 hover:bg-black/60 transition-all duration-700 card-glow-gold"
           >
-            <div className="flex flex-col gap-12 h-full">
+            <div className="flex flex-col gap-8 md:gap-12 h-full">
               <div className="flex justify-between items-start">
-                <span className="text-[12px] font-black text-white/20 uppercase tracking-widest">Section 03</span>
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gold border border-white/10 group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-lg">
-                  <card.icon size={26} />
+                <span className="text-[10px] md:text-[12px] font-black text-white/20 uppercase tracking-widest">Section 03</span>
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center text-gold border border-white/10 group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-lg">
+                  <card.icon size={22} />
                 </div>
               </div>
               
-              <div className="space-y-6">
-                <h3 className="text-4xl font-heading font-black text-white uppercase tracking-tighter leading-none group-hover:text-gold transition-colors">{card.title}</h3>
-                <div className="h-0.5 w-12 bg-gold/50 group-hover:w-20 group-hover:bg-gold transition-all duration-700" />
+              <div className="space-y-4 md:space-y-6">
+                <h3 className="text-3xl md:text-4xl font-heading font-black text-white uppercase tracking-tighter leading-none group-hover:text-gold transition-colors">{card.title}</h3>
+                <div className="h-0.5 w-10 md:w-12 bg-gold/50 group-hover:w-20 group-hover:bg-gold transition-all duration-700" />
               </div>
 
-              <div className="space-y-5">
+              <div className="space-y-4 md:space-y-5">
                 {card.points.map((point, pIdx) => (
                   <motion.div 
                     key={pIdx} 
                     whileHover={{ x: 10 }}
-                    className="p-6 bg-white/5 backdrop-blur-sm border-l-2 border-white/10 group-hover:border-gold rounded-r-2xl transition-all"
+                    className="p-4 md:p-6 bg-white/5 backdrop-blur-sm border-l-2 border-white/10 group-hover:border-gold rounded-r-xl md:rounded-r-2xl transition-all"
                   >
-                    <p className="text-sm text-white/50 font-black uppercase tracking-tighter leading-relaxed group-hover:text-white/80 transition-colors">{point}</p>
+                    <p className="text-xs md:text-sm text-white/50 font-black uppercase tracking-tighter leading-relaxed group-hover:text-white/80 transition-colors">{point}</p>
                   </motion.div>
                 ))}
               </div>
@@ -602,25 +621,25 @@ const MarketingMix = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: idx * 0.1 }}
             className={cn(
-              "bg-black/60 backdrop-blur-xl p-12 rounded-[3rem] border border-white/10 group hover:border-gold/60 transition-all duration-700 card-glow-gold shadow-2xl",
+              "bg-black/60 backdrop-blur-xl p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-white/10 group hover:border-gold/60 transition-all duration-700 card-glow-gold shadow-2xl",
               idx === 0 ? "lg:col-span-2" : ""
             )}
           >
-            <div className="flex flex-col h-full gap-10">
+            <div className="flex flex-col h-full gap-8 md:gap-10">
               <div className="flex justify-between items-center">
-                <h3 className="text-3xl font-heading font-black text-gold uppercase tracking-tighter leading-none gold-glow">{p.title}</h3>
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/30 group-hover:text-gold transition-colors">
-                  <p.icon size={22} />
+                <h3 className="text-2xl md:text-3xl font-heading font-black text-gold uppercase tracking-tighter leading-none gold-glow">{p.title}</h3>
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center text-white/30 group-hover:text-gold transition-colors">
+                  <p.icon size={20} />
                 </div>
               </div>
               
-              <p className="text-white/70 font-medium text-base leading-relaxed uppercase tracking-tighter">
+              <p className="text-white/70 font-medium text-sm md:text-base leading-relaxed uppercase tracking-tighter">
                 {p.content}
               </p>
 
-              <div className="flex flex-wrap gap-3 mt-auto">
+              <div className="flex flex-wrap gap-2 md:gap-3 mt-auto">
                 {p.details.map((detail, dIdx) => (
-                  <div key={dIdx} className="px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-[11px] font-black uppercase tracking-[0.05em] text-white/50 group-hover:text-white transition-colors">
+                  <div key={dIdx} className="px-3 md:px-5 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl text-[9px] md:text-[11px] font-black uppercase tracking-[0.05em] text-white/50 group-hover:text-white transition-colors">
                     {detail}
                   </div>
                 ))}
@@ -639,30 +658,30 @@ const PurchaseProcess = () => {
       <SectionHeader title="Sales Process" subtitle="Transparent 8-step journey from inquiry to final handover." light />
       
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-         {purchaseSteps.map((step, idx) => (
-           <motion.div 
-             key={idx}
-             initial={{ opacity: 0, filter: "blur(10px)" }}
-             whileInView={{ opacity: 1, filter: "blur(0px)" }}
-             transition={{ duration: 0.8, delay: idx * 0.1 }}
-             className="bg-white/3 border border-white/5 p-12 rounded-[3rem] group hover:border-gold/40 transition-all duration-700 card-glow-gold"
-           >
-              <div className="space-y-10">
-                <div className="flex justify-between items-start">
-                  <div className="text-gold font-black font-heading text-5xl opacity-10">0{step.step}</div>
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:rotate-12 transition-all shadow-lg border border-white/5">
-                    <step.icon size={22} />
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <h4 className="text-xl font-heading font-black text-white uppercase tracking-widest leading-none">{step.title}</h4>
-                  <p className="text-[12px] text-white/50 font-medium leading-relaxed uppercase tracking-tighter">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-           </motion.div>
-         ))}
+          {purchaseSteps.map((step, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: idx * 0.1 }}
+              className="bg-white/3 border border-white/5 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] group hover:border-gold/40 transition-all duration-700 card-glow-gold"
+            >
+               <div className="space-y-8 md:space-y-10">
+                 <div className="flex justify-between items-start">
+                   <div className="text-gold font-black font-heading text-4xl md:text-5xl opacity-10">0{step.step}</div>
+                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:rotate-12 transition-all shadow-lg border border-white/5">
+                     <step.icon size={20} />
+                   </div>
+                 </div>
+                 <div className="space-y-3 md:space-y-4">
+                   <h4 className="text-lg md:text-xl font-heading font-black text-white uppercase tracking-widest leading-none">{step.title}</h4>
+                   <p className="text-[11px] md:text-[12px] text-white/50 font-medium leading-relaxed uppercase tracking-tighter">
+                     {step.desc}
+                   </p>
+                 </div>
+               </div>
+            </motion.div>
+          ))}
       </div>
     </Section>
   );
@@ -684,40 +703,40 @@ const MarketAnalysis = () => {
             initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: idx * 0.2 }}
-            className="bg-[#0a0a0a] p-16 rounded-[3rem] border border-white/5 flex flex-col justify-between h-[360px] group hover:border-gold/60 transition-all duration-700 shadow-2xl card-glow-gold"
+            className="bg-[#0a0a0a] p-10 md:p-16 rounded-[2rem] md:rounded-[3rem] border border-white/5 flex flex-col justify-between h-[280px] md:h-[360px] group hover:border-gold/60 transition-all duration-700 shadow-2xl card-glow-gold"
           >
             <div className="flex justify-between items-start">
-              <p className="text-white/20 text-[12px] uppercase tracking-widest font-black">{item.metric}</p>
-              <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gold opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all">
-                <item.icon size={24} />
+              <p className="text-white/20 text-[10px] md:text-[12px] uppercase tracking-widest font-black">{item.metric}</p>
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center text-gold opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all">
+                <item.icon size={20} />
               </div>
             </div>
-            <div className="space-y-4">
-              <p className="text-white/40 text-[13px] uppercase tracking-widest font-black">{item.label}</p>
-              <h4 className="text-5xl text-white font-heading font-black tracking-tighter uppercase leading-none gold-glow">{item.value}</h4>
+            <div className="space-y-2 md:space-y-4">
+              <p className="text-white/40 text-[11px] md:text-[13px] uppercase tracking-widest font-black">{item.label}</p>
+              <h4 className="text-3xl md:text-5xl text-white font-heading font-black tracking-tighter uppercase leading-none gold-glow">{item.value}</h4>
             </div>
-            <div className="pt-10 border-t border-white/5">
-              <p className="text-gold text-[12px] font-black uppercase tracking-[0.25em]">{item.note}</p>
+            <div className="pt-6 md:pt-10 border-t border-white/5">
+              <p className="text-gold text-[10px] md:text-[12px] font-black uppercase tracking-[0.25em]">{item.note}</p>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="bg-[#0a0a0a] rounded-[4rem] p-16 md:p-24 border border-white/5 text-white overflow-hidden relative shadow-[0_60px_120px_rgba(0,0,0,0.4)]">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 blur-[120px] rounded-full -mr-32 -mt-32 animate-pulse"></div>
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-12 relative z-10">
-          <div className="space-y-8">
-            <div className="px-8 py-3 border border-gold/30 rounded-full inline-block text-[11px] text-gold font-black uppercase tracking-[0.25em] shadow-[0_0_30px_rgba(197,160,89,0.1)]">Financial Intelligence</div>
-            <h3 className="text-5xl md:text-8xl font-heading font-black tracking-tighter uppercase leading-none gold-glow">Competitive<br />Positioning</h3>
-            <p className="text-white/30 font-medium max-w-md text-base leading-relaxed uppercase tracking-tighter">Target vs. Local Market Competitors analysis based on Q1 2026 data.</p>
+      <div className="bg-[#0a0a0a] rounded-[2rem] md:rounded-[4rem] p-8 md:p-16 lg:p-24 border border-white/5 text-white overflow-hidden relative shadow-[0_60px_120px_rgba(0,0,0,0.4)]">
+        <div className="absolute top-0 right-0 w-64 md:w-[500px] h-64 md:h-[500px] bg-gold/5 blur-[80px] md:blur-[120px] rounded-full -mr-32 -mt-32 animate-pulse"></div>
+        <div className="flex flex-col lg:flex-row justify-between lg:items-end mb-12 md:mb-16 gap-8 lg:gap-12 relative z-10">
+          <div className="space-y-6 md:space-y-8">
+            <div className="px-6 md:px-8 py-2 md:py-3 border border-gold/30 rounded-full inline-block text-[10px] md:text-[11px] text-gold font-black uppercase tracking-[0.25em] shadow-[0_0_30px_rgba(197,160,89,0.1)]">Financial Intelligence</div>
+            <h3 className="text-[clamp(2.5rem,8vw,5rem)] font-heading font-black tracking-tighter uppercase leading-[0.9] gold-glow">Competitive<br />Positioning</h3>
+            <p className="text-white/30 font-medium max-w-md text-sm md:text-base leading-relaxed uppercase tracking-tighter">Target vs. Local Market Competitors analysis based on Q1 2026 data.</p>
           </div>
-          <div className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] text-right shadow-xl">
-             <p className="text-[11px] text-gold font-black uppercase tracking-widest mb-2">Status</p>
-             <p className="text-2xl font-heading font-black text-white uppercase tracking-tighter">Verified Data</p>
+          <div className="p-6 md:p-8 bg-white/5 border border-white/10 rounded-[1.5rem] md:rounded-[2.5rem] text-left lg:text-right shadow-xl">
+             <p className="text-[10px] md:text-[11px] text-gold font-black uppercase tracking-widest mb-1 md:mb-2">Status</p>
+             <p className="text-xl md:text-2xl font-heading font-black text-white uppercase tracking-tighter">Verified Data</p>
           </div>
         </div>
 
-        <div className="h-[450px] w-full mt-12 relative z-10">
+        <div className="h-[300px] md:h-[450px] w-full mt-8 md:mt-12 relative z-10">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={cmaData} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
@@ -767,14 +786,14 @@ const IssuesAndSolutions = () => {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="p-10 bg-black/60 backdrop-blur-xl border border-white/10 rounded-[3rem] flex flex-col gap-8 group hover:bg-black transition-all duration-1000 card-glow-gold shadow-2xl"
+                className="p-8 md:p-10 bg-black/60 backdrop-blur-xl border border-white/10 rounded-[2rem] md:rounded-[3rem] flex flex-col gap-6 md:gap-8 group hover:bg-black transition-all duration-1000 card-glow-gold shadow-2xl"
               >
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-md border border-white/5">
-                  <item.icon size={24} />
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-md border border-white/5">
+                  <item.icon size={22} md:size={24} />
                 </div>
-                <div className="space-y-3">
-                  <h5 className="text-xl font-black uppercase text-white group-hover:text-gold transition-colors tracking-tight leading-none group-hover:gold-glow">{item.title}</h5>
-                  <p className="text-sm text-white/40 group-hover:text-white/60 uppercase font-bold tracking-tight leading-relaxed transition-colors">{item.desc}</p>
+                <div className="space-y-2 md:space-y-3">
+                  <h5 className="text-lg md:text-xl font-black uppercase text-white group-hover:text-gold transition-colors tracking-tight leading-none group-hover:gold-glow">{item.title}</h5>
+                  <p className="text-[11px] md:text-sm text-white/40 group-hover:text-white/60 uppercase font-bold tracking-tight leading-relaxed transition-colors">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -791,17 +810,17 @@ const IssuesAndSolutions = () => {
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="p-10 bg-gold/90 backdrop-blur-xl rounded-[3rem] flex flex-col gap-8 group hover:bg-black transition-all duration-1000 shadow-2xl relative overflow-hidden"
+                className="p-8 md:p-10 bg-gold/90 backdrop-blur-xl rounded-[2rem] md:rounded-[3rem] flex flex-col gap-6 md:gap-8 group hover:bg-black transition-all duration-1000 shadow-2xl relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
-                  <item.icon size={80} />
+                  <item.icon size={60} md:size={80} />
                 </div>
-                <div className="w-14 h-14 rounded-2xl bg-black flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-lg relative z-10">
-                  <item.icon size={24} />
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-black flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-lg relative z-10">
+                  <item.icon size={22} md:size={24} />
                 </div>
-                <div className="space-y-3 relative z-10">
-                  <h5 className="text-xl font-black uppercase text-black group-hover:text-white transition-colors tracking-tight leading-none group-hover:gold-glow">{item.title}</h5>
-                  <p className="text-sm text-black/70 group-hover:text-white/40 transition-colors uppercase font-bold tracking-tight leading-relaxed">{item.desc}</p>
+                <div className="space-y-2 md:space-y-3 relative z-10">
+                  <h5 className="text-lg md:text-xl font-black uppercase text-black group-hover:text-white transition-colors tracking-tight leading-none group-hover:gold-glow">{item.title}</h5>
+                  <p className="text-[11px] md:text-sm text-black/70 group-hover:text-white/40 transition-colors uppercase font-bold tracking-tight leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -828,44 +847,44 @@ const PresentationAccess = () => {
            initial={{ opacity: 0, scale: 0.9 }}
            whileInView={{ opacity: 1, scale: 1 }}
            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-           className="relative p-2 bg-gold rounded-[4.5rem] shadow-[0_0_150px_rgba(197,160,89,0.3)]"
+           className="relative p-1 md:p-2 bg-gold rounded-[2.5rem] md:rounded-[4.5rem] shadow-[0_0_150px_rgba(197,160,89,0.3)] w-full max-w-2xl"
         >
-           <div className="bg-[#0a0a0a] p-20 md:p-32 rounded-[4.2rem] flex flex-col items-center gap-16 relative overflow-hidden">
+           <div className="bg-[#0a0a0a] p-10 md:p-24 lg:p-32 rounded-[2.2rem] md:rounded-[4.2rem] flex flex-col items-center gap-10 md:gap-16 relative overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.05)_0%,transparent_70%)]" />
               
               <div className="relative group z-10">
-                 <div className="absolute -inset-12 bg-gold/20 blur-3xl rounded-full animate-pulse transition-all group-hover:bg-gold/30 group-hover:blur-4xl"></div>
-                 <div className="relative p-12 bg-white rounded-[4rem] border-[20px] border-black shadow-[0_40px_80px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-1000 ease-out">
+                 <div className="absolute -inset-8 md:-inset-12 bg-gold/20 blur-2xl md:blur-3xl rounded-full animate-pulse transition-all group-hover:bg-gold/30"></div>
+                 <div className="relative p-6 md:p-12 bg-white rounded-[2rem] md:rounded-[4rem] border-[10px] md:border-[20px] border-black shadow-[0_40px_80px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                     {appUrl && (
                       <QRCodeCanvas 
                         value={appUrl} 
-                        size={320} 
+                        size={window.innerWidth < 768 ? 160 : 320} 
                         level="H" 
                         includeMargin={false}
-                        className="rounded-3xl"
+                        className="rounded-xl md:rounded-3xl"
                       />
                     )}
                  </div>
               </div>
 
-              <div className="space-y-12 text-center max-w-xl relative z-10">
-                 <div className="flex justify-center gap-10">
-                    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }}><Smartphone className="text-gold" size={32} /></motion.div>
-                    <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}><Monitor className="text-white/20" size={32} /></motion.div>
+              <div className="space-y-6 md:space-y-12 text-center max-w-xl relative z-10">
+                 <div className="flex justify-center gap-6 md:gap-10">
+                    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }}><Smartphone className="text-gold" size={24} /></motion.div>
+                    <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}><Monitor className="text-white/20" size={24} /></motion.div>
                  </div>
-                 <h3 className="text-4xl md:text-5xl font-heading font-black text-white uppercase tracking-tighter leading-[0.85] gold-glow">
+                 <h3 className="text-2xl md:text-5xl font-heading font-black text-white uppercase tracking-tighter leading-[0.9] gold-glow">
                     Scan to view interactive<br />Marketing presentation
                  </h3>
-                 <div className="py-6 px-10 bg-white/5 border border-white/5 rounded-3xl flex items-center justify-center gap-4 shadow-inner">
-                    <div className="w-3 h-3 rounded-full bg-gold animate-ping" />
-                    <p className="text-[12px] text-white/50 font-black uppercase tracking-[0.5em] font-heading">
+                 <div className="py-3 md:py-6 px-6 md:px-10 bg-white/5 border border-white/5 rounded-2xl md:rounded-3xl flex items-center justify-center gap-3 md:gap-4 shadow-inner">
+                    <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-gold animate-ping" />
+                    <p className="text-[9px] md:text-[12px] text-white/50 font-black uppercase tracking-[0.5em] font-heading">
                       Ready for instant review
                     </p>
                  </div>
-                 <p className="text-[10px] text-white/20 font-black uppercase tracking-[0.5em] leading-relaxed opacity-60">
-                    Best viewed on desktop or modern mobile browsers<br />Optimized for projector presentation walkthrough
-                 </p>
               </div>
+              <p className="text-[10px] text-white/20 font-black uppercase tracking-[0.5em] leading-relaxed opacity-60 relative z-10">
+                 Best viewed on desktop or modern mobile browsers<br />Optimized for projector presentation walkthrough
+              </p>
            </div>
         </motion.div>
       </div>
@@ -876,42 +895,42 @@ const PresentationAccess = () => {
 const SpecialistProfile = () => {
   return (
     <Section id="specialist" className="bg-white">
-      <div className="bg-[#0a0a0a] rounded-[4rem] p-16 md:p-32 text-white flex flex-col md:flex-row items-center gap-24 overflow-hidden relative shadow-[0_80px_160px_rgba(0,0,0,0.5)]">
+      <div className="bg-[#0a0a0a] rounded-[2rem] md:rounded-[4rem] p-8 md:p-20 lg:p-32 text-white flex flex-col lg:flex-row items-center gap-12 md:gap-24 overflow-hidden relative shadow-[0_80px_160px_rgba(0,0,0,0.5)]">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(197,160,89,0.15)_0%,transparent_60%)]"></div>
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gold/5 blur-[120px] rounded-full -mr-64 -mb-64"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-gold/5 blur-[80px] md:blur-[120px] rounded-full -mr-32 md:-mr-64 -mb-32 md:-mb-64"></div>
         
-        <div className="relative z-10 space-y-12 flex-1">
-          <div className="px-8 py-3 border border-gold/40 rounded-full inline-block text-[11px] text-gold font-black uppercase tracking-[0.3em] shadow-[0_0_30px_rgba(197,160,89,0.1)]">Section 10: Contact Specialist</div>
-          <h2 className="text-6xl md:text-9xl font-heading font-black tracking-tighter uppercase leading-[0.8] gold-glow">
+        <div className="relative z-10 space-y-8 md:space-y-12 flex-1 text-center lg:text-left">
+          <div className="px-6 md:px-8 py-2 md:py-3 border border-gold/40 rounded-full inline-block text-[10px] md:text-[11px] text-gold font-black uppercase tracking-[0.3em] shadow-[0_0_30px_rgba(197,160,89,0.1)]">Section 10: Contact Specialist</div>
+          <h2 className="text-4xl md:text-7xl lg:text-9xl font-heading font-black tracking-tighter uppercase leading-[0.9] gold-glow">
             Nadia<br />
             <span className="text-gold">Nasir</span>
           </h2>
-          <div className="space-y-6">
-            <p className="text-2xl md:text-4xl font-heading font-bold text-white/90 uppercase tracking-tighter">DREA26022 • KLCC & Cyberjaya Specialist</p>
-            <p className="text-xl font-medium text-white/40 max-w-xl leading-relaxed uppercase tracking-tighter">
+          <div className="space-y-4 md:space-y-6">
+            <p className="text-lg md:text-2xl lg:text-4xl font-heading font-bold text-white/90 uppercase tracking-tighter leading-tight">DREA26022 • KLCC & Cyberjaya Specialist</p>
+            <p className="text-sm md:text-xl font-medium text-white/40 max-w-xl mx-auto lg:mx-0 leading-relaxed uppercase tracking-tighter">
               "Turning Dreams into Addresses. Professional in local real estate, dedicated to finding your perfect home or business space."
             </p>
           </div>
           
-          <div className="flex flex-wrap gap-6 pt-6">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-4 md:gap-6 pt-4 md:pt-6">
              <motion.a 
                 whileHover={{ scale: 1.05 }}
                 href="mailto:nazreenanadia.n@gmail.com" 
-                className="flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full font-black uppercase tracking-wider text-[12px] hover:bg-gold transition-all shadow-xl"
+                className="flex items-center gap-3 md:gap-4 px-8 md:px-12 py-4 md:py-6 bg-white text-black rounded-full font-black uppercase tracking-wider text-[10px] md:text-[12px] hover:bg-gold transition-all shadow-xl"
              >
-                <Mail size={18} />
+                <Mail size={16} />
                 nazreenanadia.n@gmail.com
              </motion.a>
           </div>
         </div>
 
-        <div className="relative z-10 w-full md:w-[35%] aspect-[3/4] rounded-[3.5rem] overflow-hidden bg-white/5 border border-white/10 flex flex-col items-center justify-center p-12 text-center group shadow-inner">
-           <div className="w-28 h-28 bg-gold rounded-[2rem] flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 shadow-[0_20px_40px_rgba(197,160,89,0.3)]">
-              <UserCheck size={56} className="text-black" />
+        <div className="relative z-10 w-full lg:w-[35%] aspect-[3/4] rounded-[2rem] md:rounded-[3.5rem] overflow-hidden bg-white/5 border border-white/10 flex flex-col items-center justify-center p-8 md:p-12 text-center group shadow-inner">
+           <div className="w-20 h-20 md:w-28 md:h-28 bg-gold rounded-[1.5rem] md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 shadow-[0_20px_40px_rgba(197,160,89,0.3)]">
+              <UserCheck size={40} md:size={56} className="text-black" />
            </div>
-           <p className="text-[12px] font-black uppercase tracking-[0.4em] mb-4 text-white/20">Certified Professional</p>
-           <p className="text-4xl font-heading font-black text-white uppercase tracking-tighter leading-none gold-glow">DREA26022</p>
-           <div className="mt-12 h-1 w-12 bg-gold/30 rounded-full" />
+           <p className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.4em] mb-2 md:mb-4 text-white/20">Certified Professional</p>
+           <p className="text-2xl md:text-4xl font-heading font-black text-white uppercase tracking-tighter leading-none gold-glow">DREA26022</p>
+           <div className="mt-8 md:mt-12 h-1 w-10 md:w-12 bg-gold/30 rounded-full" />
         </div>
       </div>
     </Section>
@@ -945,28 +964,28 @@ const Conclusion = () => {
               <span className="text-gold text-sm uppercase tracking-[0.6em] font-black shadow-glow-gold">Conclusion</span>
             </motion.div>
             
-            <h2 className="text-7xl md:text-[10rem] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase gold-glow">
+            <h2 className="text-5xl md:text-[clamp(4rem,10vw,10rem)] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase gold-glow">
               Dua M<br />Success<span className="text-gold"> Story</span>
             </h2>
 
-            <div className="space-y-10 max-w-xl">
+            <div className="space-y-6 md:space-y-10 max-w-xl">
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="p-10 bg-white/5 border-l-4 border-gold rounded-r-[3rem] shadow-2xl backdrop-blur-sm"
+                className="p-6 md:p-10 bg-white/5 border-l-4 border-gold rounded-r-[2rem] md:rounded-r-[3rem] shadow-2xl backdrop-blur-sm"
               >
-                 <h4 className="text-gold text-sm font-black uppercase tracking-widest mb-4">Final Asset Verdict</h4>
-                 <p className="text-white/50 text-[13px] font-black leading-relaxed uppercase tracking-widest">Prime location proximity ensures consistent appreciation and high market retention in the long term.</p>
+                 <h4 className="text-gold text-xs md:text-sm font-black uppercase tracking-widest mb-2 md:mb-4">Final Asset Verdict</h4>
+                 <p className="text-white/50 text-[11px] md:text-[13px] font-black leading-relaxed uppercase tracking-widest">Prime location proximity ensures consistent appreciation and high market retention in the long term.</p>
               </motion.div>
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.7 }}
-                className="p-10 bg-white/5 border-l-4 border-white/20 rounded-r-[3rem] backdrop-blur-sm"
+                className="p-6 md:p-10 bg-white/5 border-l-4 border-white/20 rounded-r-[2rem] md:rounded-r-[3rem] backdrop-blur-sm"
               >
-                 <h4 className="text-white/80 text-sm font-black uppercase tracking-widest mb-4">Marketing Synergy</h4>
-                 <p className="text-white/50 text-[13px] font-black leading-relaxed uppercase tracking-widest">Omnichannel digital execution guarantees top-of-mind brand recall and rapid sales conversions.</p>
+                 <h4 className="text-white/80 text-xs md:text-sm font-black uppercase tracking-widest mb-2 md:mb-4">Marketing Synergy</h4>
+                 <p className="text-white/50 text-[11px] md:text-[13px] font-black leading-relaxed uppercase tracking-widest">Omnichannel digital execution guarantees top-of-mind brand recall and rapid sales conversions.</p>
               </motion.div>
             </div>
           </div>
@@ -975,37 +994,37 @@ const Conclusion = () => {
             initial={{ opacity: 0, rotateY: 30, x: 100 }}
             whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
             transition={{ duration: 1.5, type: "spring" }}
-            className="bg-gold rounded-[5rem] p-20 md:p-32 text-black flex flex-col justify-between h-full min-h-[650px] shadow-[0_80px_160px_rgba(0,0,0,0.6)] relative overflow-hidden"
+            className="bg-gold rounded-[3rem] md:rounded-[5rem] p-10 md:p-20 lg:p-32 text-black flex flex-col justify-between h-full min-h-[500px] md:min-h-[650px] shadow-[0_80px_160px_rgba(0,0,0,0.6)] relative overflow-hidden"
           >
-             <div className="absolute top-0 right-0 p-24 opacity-10 pointer-events-none">
-                <TrendingUp size={240} />
+             <div className="absolute top-0 right-0 p-12 md:p-24 opacity-10 pointer-events-none">
+                <TrendingUp size={120} md:size={240} className="w-32 md:w-60" />
              </div>
 
-            <div className="space-y-10 relative z-10">
-              <h3 className="text-[10rem] md:text-[14rem] font-heading font-black tracking-tighter leading-none uppercase -ml-4">Thank<br />You</h3>
-              <div className="w-40 h-5 bg-black rounded-full" />
-              <p className="text-base font-black uppercase tracking-[0.4em] opacity-40">End of Presentation Dossier</p>
+            <div className="space-y-6 md:space-y-10 relative z-10">
+              <h3 className="text-7xl md:text-[10rem] lg:text-[14rem] font-heading font-black tracking-tighter leading-[0.8] uppercase -ml-1 md:-ml-4">Thank<br />You</h3>
+              <div className="w-20 md:w-40 h-3 md:h-5 bg-black rounded-full" />
+              <p className="text-[10px] md:text-base font-black uppercase tracking-[0.4em] opacity-40">End of Presentation Dossier</p>
             </div>
 
-            <div className="space-y-16 mt-20 relative z-10">
-              <div className="flex gap-12 items-center border-b border-black/15 pb-16">
-                <div className="w-24 h-24 bg-black rounded-3xl flex items-center justify-center shadow-xl">
-                    <p className="text-gold text-3xl font-black font-heading">#1</p>
+            <div className="space-y-8 md:space-y-16 mt-12 md:mt-20 relative z-10">
+              <div className="flex gap-6 md:gap-12 items-center border-b border-black/15 pb-8 md:pb-16 text-left">
+                <div className="w-16 h-16 md:w-24 md:h-24 bg-black rounded-[1.5rem] md:rounded-3xl flex items-center justify-center shadow-xl shrink-0">
+                    <p className="text-gold text-xl md:text-3xl font-black font-heading">#1</p>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-sm uppercase font-black tracking-widest opacity-60">Property Specialist</p>
-                  <p className="text-4xl font-black font-heading leading-tight uppercase tracking-tighter">Nadia Nasir • DREA26022</p>
+                <div className="space-y-1 md:space-y-2 overflow-hidden">
+                  <p className="text-[10px] md:text-sm uppercase font-black tracking-widest opacity-60">Property Specialist</p>
+                  <p className="text-lg md:text-4xl font-black font-heading leading-tight uppercase tracking-tighter truncate">Nadia Nasir • DREA26022</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 text-left">
                 <div>
-                  <p className="text-[12px] uppercase font-black tracking-[0.3em] opacity-60 mb-3">Expertise Area</p>
-                  <p className="text-xl font-black uppercase tracking-tighter font-heading">Luxury Real Estate Marketing & Asset Selection</p>
+                  <p className="text-[10px] md:text-[12px] uppercase font-black tracking-[0.3em] opacity-60 mb-2 md:mb-3">Expertise Area</p>
+                  <p className="text-base md:text-xl font-black uppercase tracking-tighter font-heading">Luxury Real Estate Marketing & Asset Selection</p>
                 </div>
-                <div className="text-right flex flex-col items-end">
-                  <p className="text-[12px] uppercase font-black tracking-[0.3em] opacity-60 mb-3">Portfolio Ref</p>
-                  <p className="text-xl font-black uppercase tracking-tighter font-heading">DUA-M-PRESENT-2026</p>
+                <div className="md:text-right flex flex-col md:items-end">
+                  <p className="text-[10px] md:text-[12px] uppercase font-black tracking-[0.3em] opacity-60 mb-2 md:mb-3">Portfolio Ref</p>
+                  <p className="text-base md:text-xl font-black uppercase tracking-tighter font-heading">DUA-M-PRESENT-2026</p>
                 </div>
               </div>
             </div>
@@ -1020,11 +1039,41 @@ const Conclusion = () => {
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  // Keyboard navigation for scroll snapping
+  useEffect(() => {
+    if (loading) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!containerRef.current) return;
+      
+      const container = containerRef.current;
+      const sections = Array.from(container.querySelectorAll('.cinematic-section')) as HTMLElement[];
+      const activeIndex = sections.findIndex(section => {
+        const rect = section.getBoundingClientRect();
+        return rect.top >= -50 && rect.top <= 50;
+      });
+
+      if (e.key === 'ArrowDown' || e.key === ' ') {
+        e.preventDefault();
+        const nextIndex = Math.min(activeIndex + 1, sections.length - 1);
+        sections[nextIndex]?.scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevIndex = Math.max(activeIndex - 1, 0);
+        sections[prevIndex]?.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [loading]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-sans overflow-x-hidden selection:bg-gold selection:text-black">
@@ -1063,7 +1112,11 @@ export default function App() {
       </AnimatePresence>
 
       {!loading && (
-        <div className="cinematic-container border-[10px] md:border-[16px] border-gold min-h-screen relative flex flex-col">
+        <div 
+          ref={containerRef}
+          tabIndex={0}
+          className="cinematic-container outline-none border-[6px] md:border-[16px] border-gold min-h-screen relative flex flex-col"
+        >
           <Navbar />
           <Hero />
           <PropertyOverview />
