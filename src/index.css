@@ -22,6 +22,24 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  body {
+    @apply antialiased;
+  }
+
+  /* Full-page scroll snapping */
+  .cinematic-container {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .cinematic-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
 }
 
 .text-gold {
@@ -36,20 +54,33 @@
   border-color: #C5A059;
 }
 
+/* Luxury Glow Effects */
+.gold-glow {
+  text-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+}
+
+.card-glow-gold {
+  box-shadow: 0 0 40px rgba(197, 160, 89, 0.1);
+}
+
+.card-glow-gold:hover {
+  box-shadow: 0 0 60px rgba(197, 160, 89, 0.2);
+}
+
 .font-heading {
   font-family: var(--font-heading);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-card-gold {
-  background: rgba(197, 160, 89, 0.05); /* Updated gold tint */
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(197, 160, 89, 0.2);
+  background: rgba(197, 160, 89, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 160, 89, 0.15);
 }
 
 .bg-pattern-gold {

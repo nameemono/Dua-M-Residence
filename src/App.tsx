@@ -195,7 +195,7 @@ const Navbar = () => {
     )}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex flex-col">
-          <span className="text-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-0.5 drop-shadow-sm">Nazreena Nadia – Real Estate Specialist</span>
+          <span className="text-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-0.5 drop-shadow-sm">Nadia Nasir – Real Estate Specialist</span>
           <a href="#home" className="group flex items-center gap-3">
             <div className="w-10 h-10 bg-gold flex items-center justify-center rounded-sm">
               <span className="text-black font-extrabold text-xl font-heading tracking-tighter">DM</span>
@@ -254,68 +254,92 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const [appUrl, setAppUrl] = useState('');
+  useEffect(() => { setAppUrl(window.location.href); }, []);
+
   return (
-    <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section id="home" className="cinematic-section relative h-screen w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0 text-center">
-        <img 
-          src="https://images.unsplash.com/photo-1528605248644-14dd04cb11c7?auto=format&fit=crop&q=80&w=2670" 
-          alt="Kuala Lumpur Night Skyline" 
-          className="w-full h-full object-cover scale-105 animate-subtle-zoom opacity-60"
+        <motion.img 
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1.05, opacity: 0.6 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          src="https://i.postimg.cc/Y9vgMwf6/a3ad45e66ec9d0127bc2878b0ca55637.jpg" 
+          alt="Luxury Property Background" 
+          className="w-full h-full object-cover scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0a0a0a_100%)]"></div>
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+        <div className="absolute inset-0 bg-[#0a0a0a]/75 transition-all duration-1000" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0a0a0a_90%)]" />
+        <div className="absolute inset-0 bg-gold/5 mix-blend-overlay pointer-events-none" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-8"
-        >
-          <div className="flex flex-col gap-2 border-l-2 border-gold pl-6">
-            <span className="text-gold text-xs font-black tracking-[0.4em] uppercase">Section 01: Hero Presentation</span>
-            <h1 className="text-6xl md:text-9xl font-heading font-black text-white leading-[0.8] tracking-tighter uppercase">
-              Dua M<br />Residences
-            </h1>
-          </div>
-          
-          <div className="space-y-4">
-             <h2 className="text-xl md:text-3xl text-white/70 max-w-2xl font-bold font-heading uppercase tracking-tighter leading-tight">
-                Modern Urban Living in Kuala Lumpur
-             </h2>
-             <p className="text-gold font-black uppercase tracking-[0.2em] text-xs">Professional Real Estate Marketing Portfolio</p>
-          </div>
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-8 flex-1"
+          >
+            <div className="flex flex-col gap-2 border-l-2 border-gold pl-6">
+              <span className="text-gold text-xs font-black tracking-[0.4em] uppercase">Section 01: Hero Presentation</span>
+              <h1 className="text-6xl md:text-9xl font-heading font-black text-white leading-[0.8] tracking-tighter uppercase">
+                Dua M<br />Residences
+              </h1>
+            </div>
+            
+            <div className="space-y-4">
+               <h2 className="text-xl md:text-3xl text-white/70 max-w-2xl font-bold font-heading uppercase tracking-tighter leading-tight">
+                  Modern Urban Living in Kuala Lumpur
+               </h2>
+               <p className="text-gold font-black uppercase tracking-[0.2em] text-xs">Professional Real Estate Marketing Portfolio</p>
+            </div>
 
-          <div className="flex flex-col md:flex-row gap-4 pt-4">
-            <a href="#property" className="group px-12 py-5 bg-gold text-black font-black uppercase tracking-widest text-[11px] rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(197,160,89,0.5)] text-center">
-              Explore Property
-            </a>
-            <a href="#stp" className="px-12 py-5 border border-white/20 text-white font-black uppercase tracking-widest text-[11px] rounded-full hover:bg-white/10 transition-all text-center">
-              Marketing Strategy
-            </a>
-            <a href="#interactive" className="group flex items-center justify-center gap-3 px-8 py-5 border border-gold/40 text-gold font-black uppercase tracking-widest text-[11px] rounded-full hover:bg-gold/5 transition-all">
-              <Smartphone size={14} />
-              <span>Scan to View</span>
-            </a>
-          </div>
+            <div className="flex flex-col md:flex-row gap-4 pt-4">
+              <a href="#property" className="group px-12 py-5 bg-gold text-black font-black uppercase tracking-widest text-[11px] rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(197,160,89,0.5)] text-center">
+                Explore Property
+              </a>
+              <a href="#stp" className="px-12 py-5 border border-white/20 text-white font-black uppercase tracking-widest text-[11px] rounded-full hover:bg-white/10 transition-all text-center">
+                Marketing Strategy
+              </a>
+              <a href="#interactive" className="group flex items-center justify-center gap-3 px-8 py-5 border border-gold/40 text-gold font-black uppercase tracking-widest text-[11px] rounded-full hover:bg-gold/5 transition-all md:hidden">
+                <Smartphone size={14} />
+                <span>Scan to View</span>
+              </a>
+            </div>
 
-          <div className="pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="space-y-1">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Professional</p>
-              <p className="text-white text-sm font-black font-heading uppercase">Nazreena Nadia Binti Mohd Nasir</p>
+            <div className="pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="space-y-1">
+                <p className="text-white/30 text-[11px] uppercase tracking-widest font-black">Professional</p>
+                <p className="text-white text-base font-black font-heading uppercase">Nadia Nasir</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-white/30 text-[11px] uppercase tracking-widest font-black">Student ID</p>
+                <p className="text-white text-base font-black font-heading uppercase">DREA26022</p>
+              </div>
+              <div className="col-span-2 space-y-1">
+                <p className="text-white/30 text-[11px] uppercase tracking-widest font-black">Presentation Venue</p>
+                <p className="text-white text-base font-black font-heading uppercase">Bukit Bintang CBD Contextual Analysis</p>
+              </div>
             </div>
-            <div className="space-y-1">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Registration</p>
-              <p className="text-white text-sm font-black font-heading uppercase">REN 80782</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+            className="hidden lg:block relative group h-fit"
+          >
+            <div className="absolute -inset-4 bg-gold/20 blur-xl rounded-2xl group-hover:bg-gold/30 transition-all duration-500"></div>
+            <div className="relative bg-white p-6 rounded-2xl shadow-2xl border-4 border-black group-hover:scale-105 transition-transform">
+              {appUrl && <QRCodeCanvas value={appUrl} size={150} level="H" className="rounded-lg" />}
             </div>
-            <div className="col-span-2 space-y-1">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Presentation Venue</p>
-              <p className="text-white text-sm font-black font-heading uppercase">Bukit Bintang CBD Contextual Analysis</p>
+            <div className="absolute top-full left-0 right-0 pt-4 text-center">
+               <p className="text-[10px] text-gold font-black uppercase tracking-widest">Scan for Interactive View</p>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <motion.div 
           animate={{ y: [0, 8, 0] }}
@@ -330,21 +354,88 @@ const Hero = () => {
   );
 };
 
+const Section = ({ children, id, className, light = false, bgImage }: { children: React.ReactNode, id?: string, className?: string, light?: boolean, bgImage?: string }) => (
+  <motion.section
+    id={id}
+    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    viewport={{ once: false, amount: 0.1, margin: "-100px" }}
+    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+    className={cn(
+      "cinematic-section relative min-h-screen flex flex-col justify-center py-24 px-8 overflow-hidden",
+      !bgImage && (light ? "bg-[#0a0a0a]" : "bg-white"),
+      className
+    )}
+    style={bgImage ? {
+      backgroundImage: `url(${bgImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+    } : {}}
+  >
+    {bgImage && (
+      <>
+        <div className="absolute inset-0 z-0 bg-[#0a0a0a]/80 transition-all duration-1000" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-gold/5 mix-blend-overlay pointer-events-none" />
+      </>
+    )}
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-30">
+      {!bgImage && (
+        <motion.div 
+          initial={{ scale: 1.1, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 2 }}
+          className={cn(
+            "absolute inset-0 bg-patterns",
+            light ? "invert" : ""
+          )}
+        />
+      )}
+    </div>
+    <div className="relative z-10 max-w-7xl mx-auto w-full">
+      {children}
+    </div>
+  </motion.section>
+);
+
 const SectionHeader = ({ title, subtitle, light = false }: { title: string, subtitle?: string, light?: boolean }) => (
-  <div className="mb-10 space-y-3 flex flex-col">
+  <div className="mb-16 space-y-6 flex flex-col">
     <motion.div
-      initial={{ opacity: 0, x: -15 }}
+      initial={{ opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      className="space-y-4"
+      transition={{ duration: 1, delay: 0.2 }}
+      viewport={{ once: false }}
+      className="space-y-6"
     >
-      <div className="flex items-center gap-4">
-        <div className="h-[2px] w-12 bg-gold" />
-        <h2 className={cn("text-4xl md:text-7xl font-heading font-black uppercase tracking-tighter leading-none", light ? "text-white" : "text-black")}>
+      <div className="flex items-center gap-6">
+        <motion.div 
+          initial={{ width: 0 }}
+          whileInView={{ width: 64 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="h-[2px] bg-gold shadow-[0_0_10px_rgba(197,160,89,0.5)]" 
+        />
+        <h2 className={cn(
+          "text-5xl md:text-8xl font-heading font-black uppercase tracking-tighter leading-none gold-glow", 
+          light ? "text-white" : "text-black"
+        )}>
           {title}
         </h2>
       </div>
-      {subtitle && <p className={cn("text-base md:text-lg font-medium tracking-tight max-w-3xl leading-relaxed uppercase tracking-tighter opacity-60", light ? "text-white" : "text-gray-600")}>{subtitle}</p>}
+      {subtitle && (
+        <motion.p 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className={cn(
+            "text-lg md:text-xl font-medium tracking-tight max-w-4xl leading-relaxed uppercase tracking-tighter", 
+            light ? "text-white/60" : "text-gray-500"
+          )}
+        >
+          {subtitle}
+        </motion.p>
+      )}
     </motion.div>
   </div>
 );
@@ -357,71 +448,68 @@ const PropertyOverview = () => {
   ];
 
   return (
-    <section id="property" className="py-20 bg-white px-8 relative">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeader title="Property Details" subtitle="High-demand serviced residences in Kuala Lumpur's strategic heart." />
-        
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-12 rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] p-10 md:p-16 text-white flex flex-col md:flex-row justify-between items-center gap-12 group shadow-[0_40px_80px_rgba(0,0,0,0.15)]"
-          >
-            <div className="order-2 md:order-1 space-y-10 flex-1">
-              <div className="px-6 py-2 border border-gold/40 rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Section 02: Overview</div>
-              <h3 className="text-5xl md:text-7xl font-heading font-black leading-[0.85] tracking-tighter uppercase">
-                Modern<br /> <span className="text-gold">Urban Living</span>
-              </h3>
-              <p className="text-white/30 max-w-md font-medium text-sm leading-relaxed uppercase tracking-tighter">
-                Designed for the high-performing professional. Strategic Bukit Bintang proximity ensures consistent rental yield and asset appreciation.
-              </p>
-              
-              <div className="flex gap-10 items-center border-t border-white/5 pt-10">
-                {specs.map((item, idx) => (
-                  <div key={idx} className="flex flex-col gap-1.5">
-                    <span className="text-[9px] text-white/20 uppercase tracking-widest font-black">{item.label}</span>
-                    <span className="text-sm font-black font-heading uppercase">{item.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="order-1 md:order-2 flex-shrink-0 w-full md:w-3/5 aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/5 shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=2670" 
-                alt="Luxury condo interior view" 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-            </div>
-          </motion.div>
-
-          {/* Sub-features grid */}
-          <div className="lg:col-span-12 grid md:grid-cols-3 gap-6">
-            {[
-              { icon: Dumbbell, title: "Elite Sky Gym", text: "High-spec fitness studio with direct CBD vistas." },
-              { icon: Waves, title: "Panoramic Pool", text: "Bukit Bintang skyline panoramic relaxation deck." },
-              { icon: ShieldCheck, title: "Security 24/7", text: "Multi-tier high-tech surveillance and on-site guards." }
-            ].map((feat, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-gray-50 rounded-2xl border border-gray-100 p-10 hover:bg-white hover:shadow-2xl transition-all group"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-black text-gold flex items-center justify-center mb-8 transition-all group-hover:rotate-6">
-                  <feat.icon size={22} />
+    <Section id="property">
+      <SectionHeader title="Property Details" subtitle="High-demand serviced residences in Kuala Lumpur's strategic heart." />
+      
+      <div className="grid lg:grid-cols-12 gap-12 items-stretch">
+        <div className="lg:col-span-12 rounded-[3rem] overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] p-12 md:p-20 text-white flex flex-col md:flex-row justify-between items-center gap-16 group shadow-[0_40px_100px_rgba(0,0,0,0.2)] border border-white/5 relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(197,160,89,0.1)_0%,transparent_60%)] pointer-events-none" />
+          
+          <div className="order-2 md:order-1 space-y-12 flex-1 relative z-10">
+            <div className="px-8 py-3 border border-gold/40 rounded-full inline-block text-[12px] text-gold font-black uppercase tracking-[0.25em] shadow-[0_0_20px_rgba(197,160,89,0.15)]">Section 02: Overview</div>
+            <h3 className="text-6xl md:text-8xl font-heading font-black leading-[0.8] tracking-tighter uppercase gold-glow">
+              Modern<br /> <span className="text-gold">Urban Living</span>
+            </h3>
+            <p className="text-white/50 max-w-lg font-medium text-lg leading-relaxed uppercase tracking-tighter">
+              Designed for the high-performing professional. Strategic Bukit Bintang proximity ensures consistent rental yield and asset appreciation.
+            </p>
+            
+            <div className="flex flex-wrap gap-12 items-center border-t border-white/10 pt-12">
+              {specs.map((item, idx) => (
+                <div key={idx} className="flex flex-col gap-2">
+                  <span className="text-[11px] text-white/30 uppercase tracking-widest font-black">{item.label}</span>
+                  <span className="text-lg font-black font-heading uppercase text-white/90">{item.value}</span>
                 </div>
-                <h4 className="text-xl font-heading font-black uppercase mb-3 text-black tracking-tighter">{feat.title}</h4>
-                <p className="text-xs text-gray-500 font-bold uppercase tracking-tighter leading-relaxed">{feat.text}</p>
-              </motion.div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div className="order-1 md:order-2 flex-shrink-0 w-full md:w-[55%] aspect-[16/10] overflow-hidden rounded-[2.5rem] border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)]">
+            <motion.img 
+              initial={{ scale: 1.1 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 1.5 }}
+              src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=2670" 
+              alt="Luxury condo interior view" 
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
+
+        {/* Sub-features grid */}
+        <div className="lg:col-span-12 grid md:grid-cols-3 gap-8">
+          {[
+            { icon: Dumbbell, title: "Elite Sky Gym", text: "High-spec fitness studio with direct CBD vistas." },
+            { icon: Waves, title: "INFINITY POOL", text: "Relax at the heart of the city." },
+            { icon: ShieldCheck, title: "Security 24/7", text: "Multi-tier high-tech surveillance and on-site guards." }
+          ].map((feat, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.2 }}
+              className="bg-gray-50 rounded-[2.5rem] border border-gray-100 p-12 hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.05)] card-glow-gold transition-all group"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-[#0a0a0a] text-gold flex items-center justify-center mb-10 transition-all group-hover:rotate-6 group-hover:scale-110 shadow-lg">
+                <feat.icon size={26} />
+              </div>
+              <h4 className="text-2xl font-heading font-black uppercase mb-4 text-black tracking-tighter">{feat.title}</h4>
+              <p className="text-base text-gray-500 font-bold uppercase tracking-tighter leading-relaxed">{feat.text}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
@@ -455,281 +543,272 @@ const STPAnalysis = () => {
       ]
     }
   ];
-
+  
   return (
-    <section id="stp" className="py-20 bg-[#0a0a0a] px-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-patterns opacity-5"></div>
-      <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeader title="STP Analysis" subtitle="Framework for market segmentation, targeting, and refined positioning." light />
-        
-        <div className="grid md:grid-cols-3 gap-6">
-          {cards.map((card, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white/5 border border-white/5 p-12 rounded-[2.5rem] group hover:border-gold/30 transition-all duration-700"
-            >
-              <div className="flex flex-col gap-10 h-full">
-                <div className="flex justify-between items-start">
-                  <span className="text-[10px] font-black text-white/20 uppercase tracking-widest">Section 03</span>
-                  <div className="w-12 h-12 rounded-2xl bg-white/3 flex items-center justify-center text-gold border border-white/5 group-hover:bg-gold group-hover:text-black transition-all">
-                    <card.icon size={22} />
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <h3 className="text-3xl font-heading font-black text-white uppercase tracking-tighter leading-none">{card.title}</h3>
-                  <div className="h-0.5 w-8 bg-gold group-hover:w-16 transition-all duration-500" />
-                </div>
-
-                <div className="space-y-4">
-                  {card.points.map((point, pIdx) => (
-                    <div key={pIdx} className="p-5 bg-white/3 border-l-2 border-white/10 group-hover:border-gold rounded-r-2xl transition-all">
-                      <p className="text-[11px] text-white/40 font-black uppercase tracking-tighter leading-relaxed">{point}</p>
-                    </div>
-                  ))}
+    <Section id="stp" light bgImage="https://i.postimg.cc/0NWmTNm8/fade5940f133021dbef95b09bfe90d58.jpg">
+      <SectionHeader title="STP Analysis" subtitle="Framework for market segmentation, targeting, and refined positioning." light />
+      
+      <div className="grid md:grid-cols-3 gap-8">
+        {cards.map((card, idx) => (
+          <motion.div 
+            key={idx}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: idx * 0.2 }}
+            className="bg-black/40 backdrop-blur-md border border-white/10 p-12 rounded-[3rem] group hover:border-gold/40 hover:bg-black/60 transition-all duration-700 card-glow-gold"
+          >
+            <div className="flex flex-col gap-12 h-full">
+              <div className="flex justify-between items-start">
+                <span className="text-[12px] font-black text-white/20 uppercase tracking-widest">Section 03</span>
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gold border border-white/10 group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-lg">
+                  <card.icon size={26} />
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              
+              <div className="space-y-6">
+                <h3 className="text-4xl font-heading font-black text-white uppercase tracking-tighter leading-none group-hover:text-gold transition-colors">{card.title}</h3>
+                <div className="h-0.5 w-12 bg-gold/50 group-hover:w-20 group-hover:bg-gold transition-all duration-700" />
+              </div>
+
+              <div className="space-y-5">
+                {card.points.map((point, pIdx) => (
+                  <motion.div 
+                    key={pIdx} 
+                    whileHover={{ x: 10 }}
+                    className="p-6 bg-white/5 backdrop-blur-sm border-l-2 border-white/10 group-hover:border-gold rounded-r-2xl transition-all"
+                  >
+                    <p className="text-sm text-white/50 font-black uppercase tracking-tighter leading-relaxed group-hover:text-white/80 transition-colors">{point}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 };
 
 const MarketingMix = () => {
   return (
-    <section id="7ps" className="py-20 bg-white px-8 relative">
-      <div className="absolute inset-0 bg-gray-50/50 pointer-events-none"></div>
-      <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeader title="Marketing Mix" subtitle="The 7Ps strategic framework for property success." />
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {psData.map((p, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
-              className={cn(
-                "bg-[#0a0a0a] p-10 rounded-3xl border border-white/5 group hover:border-gold/30 transition-all duration-500",
-                idx === 0 ? "lg:col-span-2" : ""
-              )}
-            >
-              <div className="flex flex-col h-full gap-8">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-heading font-black text-gold uppercase tracking-tighter leading-none">{p.title}</h3>
-                  <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-white/30 group-hover:text-gold transition-colors">
-                    <p.icon size={20} />
-                  </div>
-                </div>
-                
-                <p className="text-white/40 font-medium text-xs leading-relaxed uppercase tracking-tighter">
-                  {p.content}
-                </p>
-
-                <div className="space-y-2 mt-auto">
-                  {p.details.map((detail, dIdx) => (
-                    <div key={dIdx} className="px-4 py-3 bg-white/3 border border-white/3 rounded-xl text-[9px] font-black uppercase tracking-[0.05em] text-white/20 group-hover:text-white transition-colors">
-                      {detail}
-                    </div>
-                  ))}
+    <Section id="7ps" bgImage="https://i.postimg.cc/xCBmdFtk/ab9818f2cdb3f2453e1c964f203f6616.jpg">
+      <SectionHeader title="Marketing Mix" subtitle="The 7Ps strategic framework for property success." light />
+      
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {psData.map((p, idx) => (
+          <motion.div 
+            key={idx}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: idx * 0.1 }}
+            className={cn(
+              "bg-black/60 backdrop-blur-xl p-12 rounded-[3rem] border border-white/10 group hover:border-gold/60 transition-all duration-700 card-glow-gold shadow-2xl",
+              idx === 0 ? "lg:col-span-2" : ""
+            )}
+          >
+            <div className="flex flex-col h-full gap-10">
+              <div className="flex justify-between items-center">
+                <h3 className="text-3xl font-heading font-black text-gold uppercase tracking-tighter leading-none gold-glow">{p.title}</h3>
+                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/30 group-hover:text-gold transition-colors">
+                  <p.icon size={22} />
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              
+              <p className="text-white/70 font-medium text-base leading-relaxed uppercase tracking-tighter">
+                {p.content}
+              </p>
+
+              <div className="flex flex-wrap gap-3 mt-auto">
+                {p.details.map((detail, dIdx) => (
+                  <div key={dIdx} className="px-5 py-3 bg-white/5 border border-white/10 rounded-xl text-[11px] font-black uppercase tracking-[0.05em] text-white/50 group-hover:text-white transition-colors">
+                    {detail}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 };
 
 const PurchaseProcess = () => {
   return (
-    <section id="purchase" className="py-20 bg-[#0a0a0a] px-8 relative overflow-hidden border-y border-white/5">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeader title="Sales Process" subtitle="Transparent 8-step journey from inquiry to final handover." light />
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
-           {purchaseSteps.map((step, idx) => (
-             <motion.div 
-               key={idx}
-               initial={{ opacity: 0, y: 10 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ delay: idx * 0.05 }}
-               className="bg-white/3 border border-white/3 p-10 rounded-3xl group hover:border-gold/40 transition-all duration-500"
-             >
-                <div className="space-y-8">
-                  <div className="flex justify-between items-start">
-                    <div className="text-gold font-black font-heading text-4xl opacity-10">0{step.step}</div>
-                    <div className="w-11 h-11 rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:rotate-6 transition-all">
-                      <step.icon size={22} />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h4 className="text-base font-heading font-black text-white uppercase tracking-widest leading-none">{step.title}</h4>
-                    <p className="text-[10px] text-white/30 font-medium leading-relaxed uppercase tracking-tighter">
-                      {step.desc}
-                    </p>
+    <Section id="purchase" light className="border-y border-white/5">
+      <SectionHeader title="Sales Process" subtitle="Transparent 8-step journey from inquiry to final handover." light />
+      
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+         {purchaseSteps.map((step, idx) => (
+           <motion.div 
+             key={idx}
+             initial={{ opacity: 0, filter: "blur(10px)" }}
+             whileInView={{ opacity: 1, filter: "blur(0px)" }}
+             transition={{ duration: 0.8, delay: idx * 0.1 }}
+             className="bg-white/3 border border-white/5 p-12 rounded-[3rem] group hover:border-gold/40 transition-all duration-700 card-glow-gold"
+           >
+              <div className="space-y-10">
+                <div className="flex justify-between items-start">
+                  <div className="text-gold font-black font-heading text-5xl opacity-10">0{step.step}</div>
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:rotate-12 transition-all shadow-lg border border-white/5">
+                    <step.icon size={22} />
                   </div>
                 </div>
-             </motion.div>
-           ))}
-        </div>
+                <div className="space-y-4">
+                  <h4 className="text-xl font-heading font-black text-white uppercase tracking-widest leading-none">{step.title}</h4>
+                  <p className="text-[12px] text-white/50 font-medium leading-relaxed uppercase tracking-tighter">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+           </motion.div>
+         ))}
       </div>
-    </section>
+    </Section>
   );
 };
 
 const MarketAnalysis = () => {
   return (
-    <section id="market" className="py-20 bg-white px-8">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeader title="Market Analysis" subtitle="Data-driven intelligence for professional pricing & positioning." />
-        
-        <div className="grid lg:grid-cols-3 gap-6 mb-12">
-          {[
-            { metric: "Metric 01", label: "Price Range", value: "RM450k – 600k", note: "Mid-market Luxury Sweet Spot", icon: BarChart3 },
-            { metric: "Metric 02", label: "Recommended Price", value: "RM470 – 490 psf", note: "Aggressive Competitive Entry", icon: TrendingUp },
-            { metric: "Metric 03", label: "Project Yield", value: "5.8 – 6.5%", note: "Projected Annual Return", icon: Target }
-          ].map((item, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-[#0a0a0a] p-12 rounded-[2rem] border border-white/5 flex flex-col justify-between h-[300px] group hover:border-gold/40 transition-all shadow-2xl"
-            >
-              <div className="flex justify-between items-start">
-                <p className="text-white/20 text-[10px] uppercase tracking-widest font-black">{item.metric}</p>
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gold opacity-30 group-hover:opacity-100 transition-opacity">
-                  <item.icon size={20} />
-                </div>
+    <Section id="market">
+      <SectionHeader title="Market Analysis" subtitle="Data-driven intelligence for professional pricing & positioning." />
+      
+      <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        {[
+          { metric: "Metric 01", label: "Price Range", value: "RM450k – 600k", note: "Mid-market Luxury Sweet Spot", icon: BarChart3 },
+          { metric: "Metric 02", label: "Recommended Price", value: "RM470 – 490 psf", note: "Aggressive Competitive Entry", icon: TrendingUp },
+          { metric: "Metric 03", label: "Project Yield", value: "5.8 – 6.5%", note: "Projected Annual Return", icon: Target }
+        ].map((item, idx) => (
+          <motion.div 
+            key={idx}
+            initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: idx * 0.2 }}
+            className="bg-[#0a0a0a] p-16 rounded-[3rem] border border-white/5 flex flex-col justify-between h-[360px] group hover:border-gold/60 transition-all duration-700 shadow-2xl card-glow-gold"
+          >
+            <div className="flex justify-between items-start">
+              <p className="text-white/20 text-[12px] uppercase tracking-widest font-black">{item.metric}</p>
+              <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gold opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all">
+                <item.icon size={24} />
               </div>
-              <div className="space-y-2">
-                <p className="text-white/40 text-[11px] uppercase tracking-widest font-black">{item.label}</p>
-                <h4 className="text-4xl text-white font-heading font-black tracking-tighter uppercase leading-none">{item.value}</h4>
-              </div>
-              <div className="pt-8 border-t border-white/5">
-                <p className="text-gold text-[10px] font-black uppercase tracking-[0.2em]">{item.note}</p>
-              </div>
-            </motion.div>
-          ))}
+            </div>
+            <div className="space-y-4">
+              <p className="text-white/40 text-[13px] uppercase tracking-widest font-black">{item.label}</p>
+              <h4 className="text-5xl text-white font-heading font-black tracking-tighter uppercase leading-none gold-glow">{item.value}</h4>
+            </div>
+            <div className="pt-10 border-t border-white/5">
+              <p className="text-gold text-[12px] font-black uppercase tracking-[0.25em]">{item.note}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="bg-[#0a0a0a] rounded-[4rem] p-16 md:p-24 border border-white/5 text-white overflow-hidden relative shadow-[0_60px_120px_rgba(0,0,0,0.4)]">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 blur-[120px] rounded-full -mr-32 -mt-32 animate-pulse"></div>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-12 relative z-10">
+          <div className="space-y-8">
+            <div className="px-8 py-3 border border-gold/30 rounded-full inline-block text-[11px] text-gold font-black uppercase tracking-[0.25em] shadow-[0_0_30px_rgba(197,160,89,0.1)]">Financial Intelligence</div>
+            <h3 className="text-5xl md:text-8xl font-heading font-black tracking-tighter uppercase leading-none gold-glow">Competitive<br />Positioning</h3>
+            <p className="text-white/30 font-medium max-w-md text-base leading-relaxed uppercase tracking-tighter">Target vs. Local Market Competitors analysis based on Q1 2026 data.</p>
+          </div>
+          <div className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] text-right shadow-xl">
+             <p className="text-[11px] text-gold font-black uppercase tracking-widest mb-2">Status</p>
+             <p className="text-2xl font-heading font-black text-white uppercase tracking-tighter">Verified Data</p>
+          </div>
         </div>
 
-        <div className="bg-[#0a0a0a] rounded-[3rem] p-12 md:p-20 border border-white/3 text-white overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gold/5 blur-[100px] rounded-full -mr-32 -mt-32"></div>
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 relative z-10">
-            <div className="space-y-6">
-              <div className="px-6 py-2 border border-gold/30 rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Financial Intelligence</div>
-              <h3 className="text-4xl md:text-6xl font-heading font-black tracking-tighter uppercase leading-none">Competitive<br />Positioning</h3>
-              <p className="text-white/20 font-medium max-w-sm text-sm leading-relaxed uppercase tracking-tighter">Target vs. Local Market Competitors analysis based on Q1 2026 data.</p>
-            </div>
-            <div className="p-6 bg-white/3 border border-white/5 rounded-3xl text-right">
-               <p className="text-[10px] text-gold font-black uppercase tracking-widest mb-1">Status</p>
-               <p className="text-xl font-heading font-black text-white uppercase tracking-tighter">Verified Data</p>
-            </div>
-          </div>
-
-          <div className="h-[400px] w-full mt-10 relative z-10">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={cmaData} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
-                <XAxis 
-                  dataKey="name" 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#ffffff30', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}
-                  dy={15}
-                />
-                <YAxis 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#ffffff15', fontSize: 10 }}
-                  tickFormatter={(val) => `RM ${(val / 1000)}k`}
-                />
-                <Tooltip 
-                  cursor={{ fill: 'rgba(255, 255, 255, 0.03)' }}
-                  contentStyle={{ backgroundColor: '#111', border: '1px solid #C5A05930', borderRadius: '20px', padding: '16px' }}
-                  itemStyle={{ color: '#C5A059', fontWeight: 900, textTransform: 'uppercase', fontSize: '10px' }}
-                  labelStyle={{ color: '#fff', marginBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '8px', fontWeight: 900, fontSize: '12px' }}
-                />
-                <Bar dataKey="price" radius={[4, 4, 0, 0]} barSize={50}>
-                  {cmaData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.name === 'Dua M Residences' ? '#C5A059' : '#ffffff10'} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+        <div className="h-[450px] w-full mt-12 relative z-10">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={cmaData} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
+              <XAxis 
+                dataKey="name" 
+                axisLine={false} 
+                tickLine={false} 
+                tick={{ fill: '#ffffff40', fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em' }}
+                dy={20}
+              />
+              <YAxis 
+                axisLine={false} 
+                tickLine={false} 
+                tick={{ fill: '#ffffff20', fontSize: 11 }}
+                tickFormatter={(val) => `RM ${(val / 1000)}k`}
+              />
+              <Tooltip 
+                cursor={{ fill: 'rgba(255, 255, 255, 0.04)' }}
+                contentStyle={{ backgroundColor: '#000', border: '1px solid #C5A05940', borderRadius: '24px', padding: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}
+                itemStyle={{ color: '#C5A059', fontWeight: 900, textTransform: 'uppercase', fontSize: '11px', letterSpacing: '0.05em' }}
+                labelStyle={{ color: '#fff', marginBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '12px', fontWeight: 900, fontSize: '14px', textTransform: 'uppercase' }}
+              />
+              <Bar dataKey="price" radius={[8, 8, 0, 0]} barSize={60}>
+                {cmaData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.name === 'Dua M Residences' ? '#C5A059' : '#ffffff15'} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
 const IssuesAndSolutions = () => {
   return (
-    <section id="issues" className="py-20 bg-gray-50 px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Issues */}
-          <div>
-            <SectionHeader title="Issues Faced" subtitle="Analyzing market constraints and buyer cycle friction points." />
-            <div className="grid sm:grid-cols-2 gap-4">
-              {issues.map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="p-8 bg-white border border-gray-100 rounded-[2rem] flex flex-col gap-6 group hover:bg-black transition-all duration-700"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-black group-hover:bg-gold transition-colors">
-                    <item.icon size={20} />
-                  </div>
-                  <div className="space-y-2">
-                    <h5 className="text-sm font-black uppercase text-black group-hover:text-white transition-colors tracking-tight leading-none">{item.title}</h5>
-                    <p className="text-[10px] text-gray-500 group-hover:text-white/30 uppercase font-bold tracking-tight leading-relaxed">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+    <Section id="issues" bgImage="https://i.postimg.cc/7Ls7FL7w/c370afd625d12dcf253e56150efb8300.jpg">
+      <div className="grid lg:grid-cols-2 gap-24">
+        {/* Issues */}
+        <div className="flex flex-col">
+          <SectionHeader title="Issues Faced" subtitle="Analyzing market constraints and buyer cycle friction points." light />
+          <div className="grid sm:grid-cols-2 gap-6">
+            {issues.map((item, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                className="p-10 bg-black/60 backdrop-blur-xl border border-white/10 rounded-[3rem] flex flex-col gap-8 group hover:bg-black transition-all duration-1000 card-glow-gold shadow-2xl"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-md border border-white/5">
+                  <item.icon size={24} />
+                </div>
+                <div className="space-y-3">
+                  <h5 className="text-xl font-black uppercase text-white group-hover:text-gold transition-colors tracking-tight leading-none group-hover:gold-glow">{item.title}</h5>
+                  <p className="text-sm text-white/40 group-hover:text-white/60 uppercase font-bold tracking-tight leading-relaxed transition-colors">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
+        </div>
 
-          {/* Solutions */}
-          <div className="flex flex-col">
-            <SectionHeader title="Strategic Solutions" subtitle="Interventions designed for rapid market penetration." />
-            <div className="grid sm:grid-cols-2 gap-4">
-              {solutions.map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, x: 10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="p-8 bg-gold rounded-[2rem] flex flex-col gap-6 group hover:bg-black transition-all duration-700 shadow-xl"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all">
-                    <item.icon size={20} />
-                  </div>
-                  <div className="space-y-2">
-                    <h5 className="text-sm font-black uppercase text-black group-hover:text-white transition-colors tracking-tight leading-none">{item.title}</h5>
-                    <p className="text-[10px] text-black/60 group-hover:text-white/30 transition-colors uppercase font-bold tracking-tight leading-relaxed">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+        {/* Solutions */}
+        <div className="flex flex-col">
+          <SectionHeader title="Strategic Solutions" subtitle="Interventions designed for rapid market penetration." light />
+          <div className="grid sm:grid-cols-2 gap-6">
+            {solutions.map((item, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                className="p-10 bg-gold/90 backdrop-blur-xl rounded-[3rem] flex flex-col gap-8 group hover:bg-black transition-all duration-1000 shadow-2xl relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+                  <item.icon size={80} />
+                </div>
+                <div className="w-14 h-14 rounded-2xl bg-black flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all group-hover:scale-110 shadow-lg relative z-10">
+                  <item.icon size={24} />
+                </div>
+                <div className="space-y-3 relative z-10">
+                  <h5 className="text-xl font-black uppercase text-black group-hover:text-white transition-colors tracking-tight leading-none group-hover:gold-glow">{item.title}</h5>
+                  <p className="text-sm text-black/70 group-hover:text-white/40 transition-colors uppercase font-bold tracking-tight leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
@@ -741,185 +820,199 @@ const PresentationAccess = () => {
   }, []);
 
   return (
-    <section id="interactive" className="py-20 bg-[#0a0a0a] px-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-patterns opacity-5"></div>
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold/5 blur-[150px] rounded-full -mr-96 -mt-96"></div>
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col items-center text-center space-y-16">
-          <SectionHeader title="Interactive Access" subtitle="Scan to access the full marketing dossier instantly." light />
-          
-          <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             viewport={{ once: true }}
-             className="relative p-1.5 bg-gold rounded-[3.5rem] shadow-[0_0_120px_rgba(197,160,89,0.4)]"
-          >
-             <div className="bg-[#111] p-16 md:p-24 rounded-[3.2rem] flex flex-col items-center gap-12">
-                <div className="relative group">
-                   <div className="absolute -inset-8 bg-gold/15 blur-2xl rounded-full animate-pulse transition-all group-hover:bg-gold/25 group-hover:blur-3xl"></div>
-                   <div className="relative p-8 bg-white rounded-[3rem] border-[16px] border-black shadow-2xl group-hover:scale-105 transition-transform duration-1000 ease-out">
-                      {appUrl && (
-                        <QRCodeCanvas 
-                          value={appUrl} 
-                          size={280} 
-                          level="H" 
-                          includeMargin={false}
-                          className="rounded-2xl"
-                        />
-                      )}
-                   </div>
-                </div>
+    <Section id="interactive" light>
+      <div className="flex flex-col items-center text-center space-y-20">
+        <SectionHeader title="Interactive Access" subtitle="Scan to access the full marketing dossier instantly." light />
+        
+        <motion.div 
+           initial={{ opacity: 0, scale: 0.9 }}
+           whileInView={{ opacity: 1, scale: 1 }}
+           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+           className="relative p-2 bg-gold rounded-[4.5rem] shadow-[0_0_150px_rgba(197,160,89,0.3)]"
+        >
+           <div className="bg-[#0a0a0a] p-20 md:p-32 rounded-[4.2rem] flex flex-col items-center gap-16 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.05)_0%,transparent_70%)]" />
+              
+              <div className="relative group z-10">
+                 <div className="absolute -inset-12 bg-gold/20 blur-3xl rounded-full animate-pulse transition-all group-hover:bg-gold/30 group-hover:blur-4xl"></div>
+                 <div className="relative p-12 bg-white rounded-[4rem] border-[20px] border-black shadow-[0_40px_80px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-1000 ease-out">
+                    {appUrl && (
+                      <QRCodeCanvas 
+                        value={appUrl} 
+                        size={320} 
+                        level="H" 
+                        includeMargin={false}
+                        className="rounded-3xl"
+                      />
+                    )}
+                 </div>
+              </div>
 
-                <div className="space-y-8 text-center max-w-md">
-                   <div className="flex justify-center gap-6">
-                      <Smartphone className="text-gold" size={28} />
-                      <Monitor className="text-white/20" size={28} />
-                   </div>
-                   <h3 className="text-2xl md:text-3xl font-heading font-black text-white uppercase tracking-tighter leading-[0.9]">
-                      Scan to view interactive<br />Marketing presentation
-                   </h3>
-                   <div className="py-4 px-8 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-gold animate-ping" />
-                      <p className="text-[10px] text-white/40 font-black uppercase tracking-widest font-heading">
-                        Ready for instant review
-                      </p>
-                   </div>
-                   <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.4em] leading-relaxed">
-                      Best viewed on desktop or modern mobile browsers<br />Optimized for projector presentation
-                   </p>
-                </div>
-             </div>
-          </motion.div>
-        </div>
+              <div className="space-y-12 text-center max-w-xl relative z-10">
+                 <div className="flex justify-center gap-10">
+                    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }}><Smartphone className="text-gold" size={32} /></motion.div>
+                    <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}><Monitor className="text-white/20" size={32} /></motion.div>
+                 </div>
+                 <h3 className="text-4xl md:text-5xl font-heading font-black text-white uppercase tracking-tighter leading-[0.85] gold-glow">
+                    Scan to view interactive<br />Marketing presentation
+                 </h3>
+                 <div className="py-6 px-10 bg-white/5 border border-white/5 rounded-3xl flex items-center justify-center gap-4 shadow-inner">
+                    <div className="w-3 h-3 rounded-full bg-gold animate-ping" />
+                    <p className="text-[12px] text-white/50 font-black uppercase tracking-[0.5em] font-heading">
+                      Ready for instant review
+                    </p>
+                 </div>
+                 <p className="text-[10px] text-white/20 font-black uppercase tracking-[0.5em] leading-relaxed opacity-60">
+                    Best viewed on desktop or modern mobile browsers<br />Optimized for projector presentation walkthrough
+                 </p>
+              </div>
+           </div>
+        </motion.div>
       </div>
-    </section>
+    </Section>
   );
 };
 
 const SpecialistProfile = () => {
   return (
-    <section id="specialist" className="py-20 bg-white px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="bg-[#0a0a0a] rounded-[3rem] p-12 md:p-20 text-white flex flex-col md:flex-row items-center gap-16 overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(197,160,89,0.1)_0%,transparent_50%)]"></div>
-          
-          <div className="relative z-10 space-y-8 flex-1">
-            <div className="px-6 py-2 border border-gold/30 rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Contact Specialist</div>
-            <h2 className="text-5xl md:text-7xl font-heading font-black tracking-tighter uppercase leading-[0.85]">
-              Nazreena Nadia<br />
-              <span className="text-gold">Mohd Nasir</span>
-            </h2>
-            <div className="space-y-4">
-              <p className="text-xl md:text-2xl font-heading font-bold text-white/80 uppercase tracking-tighter">REN 80782 • KLCC & Cyberjaya Specialist</p>
-              <p className="text-sm font-medium text-white/40 max-w-lg leading-relaxed uppercase tracking-tighter">
-                "Turning Dreams into Addresses. Professional in local real estate, dedicated to finding your perfect home or business space."
-              </p>
-            </div>
-            
-            <div className="flex flex-wrap gap-4 pt-4">
-               <a href="mailto:nazreenanadia.n@gmail.com" className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-black uppercase tracking-widest text-[11px] hover:bg-gold transition-colors">
-                  <Mail size={16} />
-                  nazreenanadia.n@gmail.com
-               </a>
-            </div>
+    <Section id="specialist" className="bg-white">
+      <div className="bg-[#0a0a0a] rounded-[4rem] p-16 md:p-32 text-white flex flex-col md:flex-row items-center gap-24 overflow-hidden relative shadow-[0_80px_160px_rgba(0,0,0,0.5)]">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(197,160,89,0.15)_0%,transparent_60%)]"></div>
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gold/5 blur-[120px] rounded-full -mr-64 -mb-64"></div>
+        
+        <div className="relative z-10 space-y-12 flex-1">
+          <div className="px-8 py-3 border border-gold/40 rounded-full inline-block text-[11px] text-gold font-black uppercase tracking-[0.3em] shadow-[0_0_30px_rgba(197,160,89,0.1)]">Section 10: Contact Specialist</div>
+          <h2 className="text-6xl md:text-9xl font-heading font-black tracking-tighter uppercase leading-[0.8] gold-glow">
+            Nadia<br />
+            <span className="text-gold">Nasir</span>
+          </h2>
+          <div className="space-y-6">
+            <p className="text-2xl md:text-4xl font-heading font-bold text-white/90 uppercase tracking-tighter">DREA26022 • KLCC & Cyberjaya Specialist</p>
+            <p className="text-xl font-medium text-white/40 max-w-xl leading-relaxed uppercase tracking-tighter">
+              "Turning Dreams into Addresses. Professional in local real estate, dedicated to finding your perfect home or business space."
+            </p>
           </div>
-
-          <div className="relative z-10 w-full md:w-1/3 aspect-[4/5] rounded-[2rem] overflow-hidden bg-white/5 border border-white/10 flex flex-col items-center justify-center p-8 text-center group">
-             <div className="w-24 h-24 bg-gold rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <UserCheck size={40} className="text-black" />
-             </div>
-             <p className="text-xs font-black uppercase tracking-[0.2em] mb-2">Verified Agent</p>
-             <p className="text-2xl font-heading font-black text-white uppercase tracking-tighter">REN 80782</p>
+          
+          <div className="flex flex-wrap gap-6 pt-6">
+             <motion.a 
+                whileHover={{ scale: 1.05 }}
+                href="mailto:nazreenanadia.n@gmail.com" 
+                className="flex items-center gap-4 px-12 py-6 bg-white text-black rounded-full font-black uppercase tracking-wider text-[12px] hover:bg-gold transition-all shadow-xl"
+             >
+                <Mail size={18} />
+                nazreenanadia.n@gmail.com
+             </motion.a>
           </div>
         </div>
+
+        <div className="relative z-10 w-full md:w-[35%] aspect-[3/4] rounded-[3.5rem] overflow-hidden bg-white/5 border border-white/10 flex flex-col items-center justify-center p-12 text-center group shadow-inner">
+           <div className="w-28 h-28 bg-gold rounded-[2rem] flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 shadow-[0_20px_40px_rgba(197,160,89,0.3)]">
+              <UserCheck size={56} className="text-black" />
+           </div>
+           <p className="text-[12px] font-black uppercase tracking-[0.4em] mb-4 text-white/20">Certified Professional</p>
+           <p className="text-4xl font-heading font-black text-white uppercase tracking-tighter leading-none gold-glow">DREA26022</p>
+           <div className="mt-12 h-1 w-12 bg-gold/30 rounded-full" />
+        </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
 const Conclusion = () => {
   return (
-    <section id="conclusion" className="relative min-h-[90vh] flex items-center justify-center py-20 px-8 overflow-hidden">
+    <Section id="conclusion" className="bg-[#0a0a0a] min-h-screen">
       <div className="absolute inset-0 z-0">
-        <img 
+        <motion.img 
+          initial={{ scale: 1.2, opacity: 0.3 }}
+          whileInView={{ scale: 1, opacity: 0.5 }}
+          transition={{ duration: 3 }}
           src="https://images.unsplash.com/photo-1595171708811-6677f4e85741?auto=format&fit=crop&q=80&w=2670" 
           alt="Aerial view of Kuala Lumpur at sunset" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/95 to-[#0a0a0a]/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/95 to-[#0a0a0a]/40"></div>
         <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-12"
-          >
-            <div className="px-8 py-3 border border-gold rounded-full inline-block">
-              <span className="text-gold text-xs uppercase tracking-[0.5em] font-black">Strategic Conclusion</span>
-            </div>
+      <div className="relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-24 items-center">
+          <div className="space-y-16">
+            <motion.div 
+               initial={{ opacity: 0, scale: 0.8 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               className="px-10 py-4 border border-gold rounded-full inline-block bg-white/5 backdrop-blur-xl"
+            >
+              <span className="text-gold text-sm uppercase tracking-[0.6em] font-black shadow-glow-gold">Conclusion</span>
+            </motion.div>
             
-            <h2 className="text-6xl md:text-9xl font-heading font-black text-white leading-[0.8] tracking-tighter uppercase">
-              The Path<br />To <span className="text-gold">Success</span>
+            <h2 className="text-7xl md:text-[10rem] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase gold-glow">
+              Dua M<br />Success<span className="text-gold"> Story</span>
             </h2>
 
-            <div className="space-y-8 max-w-md">
-              <div className="p-8 bg-white/3 border-l-4 border-gold rounded-r-[2rem] shadow-2xl">
-                 <h4 className="text-gold text-xs font-black uppercase tracking-widest mb-2">Final Asset Verdict</h4>
-                 <p className="text-white/40 text-[11px] font-black leading-relaxed uppercase tracking-tighter">Prime location proximity ensures consistent appreciation and high market retention in the long term.</p>
-              </div>
-              <div className="p-8 bg-white/3 border-l-4 border-white/10 rounded-r-[2rem]">
-                 <h4 className="text-white/80 text-xs font-black uppercase tracking-widest mb-2">Marketing Synergy</h4>
-                 <p className="text-white/40 text-[11px] font-black leading-relaxed uppercase tracking-tighter">Omnichannel digital execution guarantees top-of-mind brand recall and rapid sales conversions.</p>
-              </div>
+            <div className="space-y-10 max-w-xl">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="p-10 bg-white/5 border-l-4 border-gold rounded-r-[3rem] shadow-2xl backdrop-blur-sm"
+              >
+                 <h4 className="text-gold text-sm font-black uppercase tracking-widest mb-4">Final Asset Verdict</h4>
+                 <p className="text-white/50 text-[13px] font-black leading-relaxed uppercase tracking-widest">Prime location proximity ensures consistent appreciation and high market retention in the long term.</p>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.7 }}
+                className="p-10 bg-white/5 border-l-4 border-white/20 rounded-r-[3rem] backdrop-blur-sm"
+              >
+                 <h4 className="text-white/80 text-sm font-black uppercase tracking-widest mb-4">Marketing Synergy</h4>
+                 <p className="text-white/50 text-[13px] font-black leading-relaxed uppercase tracking-widest">Omnichannel digital execution guarantees top-of-mind brand recall and rapid sales conversions.</p>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
 
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="bg-gold rounded-[4rem] p-16 md:p-24 text-black flex flex-col justify-between h-full min-h-[550px] shadow-[0_50px_100px_rgba(0,0,0,0.3)] relative overflow-hidden"
+            initial={{ opacity: 0, rotateY: 30, x: 100 }}
+            whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
+            transition={{ duration: 1.5, type: "spring" }}
+            className="bg-gold rounded-[5rem] p-20 md:p-32 text-black flex flex-col justify-between h-full min-h-[650px] shadow-[0_80px_160px_rgba(0,0,0,0.6)] relative overflow-hidden"
           >
-             <div className="absolute top-0 right-0 p-16 opacity-10">
-                <TrendingUp size={160} />
+             <div className="absolute top-0 right-0 p-24 opacity-10 pointer-events-none">
+                <TrendingUp size={240} />
              </div>
 
-            <div className="space-y-8 relative z-10">
-              <h3 className="text-8xl md:text-9xl font-heading font-black tracking-tighter leading-none uppercase">Thank<br />You</h3>
-              <div className="w-24 h-4 bg-black rounded-full" />
-              <p className="text-sm font-black uppercase tracking-[0.2em] opacity-40">End of Presentation Dossier</p>
+            <div className="space-y-10 relative z-10">
+              <h3 className="text-[10rem] md:text-[14rem] font-heading font-black tracking-tighter leading-none uppercase -ml-4">Thank<br />You</h3>
+              <div className="w-40 h-5 bg-black rounded-full" />
+              <p className="text-base font-black uppercase tracking-[0.4em] opacity-40">End of Presentation Dossier</p>
             </div>
 
-            <div className="space-y-12 mt-16 relative z-10">
-              <div className="flex gap-10 items-center border-b border-black/10 pb-10">
-                <div className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center">
-                    <p className="text-gold text-2xl font-black font-heading">#1</p>
+            <div className="space-y-16 mt-20 relative z-10">
+              <div className="flex gap-12 items-center border-b border-black/15 pb-16">
+                <div className="w-24 h-24 bg-black rounded-3xl flex items-center justify-center shadow-xl">
+                    <p className="text-gold text-3xl font-black font-heading">#1</p>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs uppercase font-black tracking-widest opacity-60">Property Specialist</p>
-                  <p className="text-xl font-black font-heading leading-tight uppercase tracking-tighter">Nazreena Nadia • REN 80782</p>
+                <div className="space-y-2">
+                  <p className="text-sm uppercase font-black tracking-widest opacity-60">Property Specialist</p>
+                  <p className="text-4xl font-black font-heading leading-tight uppercase tracking-tighter">Nadia Nasir • DREA26022</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-12">
+              <div className="grid grid-cols-2 gap-16">
                 <div>
-                  <p className="text-[10px] uppercase font-black tracking-[0.2em] opacity-60 mb-2">Expertise</p>
-                  <p className="text-base font-black uppercase tracking-tighter font-heading">Luxury Real Estate Marketing & Sales</p>
+                  <p className="text-[12px] uppercase font-black tracking-[0.3em] opacity-60 mb-3">Expertise Area</p>
+                  <p className="text-xl font-black uppercase tracking-tighter font-heading">Luxury Real Estate Marketing & Asset Selection</p>
                 </div>
                 <div className="text-right flex flex-col items-end">
-                  <p className="text-[10px] uppercase font-black tracking-[0.2em] opacity-60 mb-2">Ref Code</p>
-                  <p className="text-base font-black uppercase tracking-tighter font-heading">DUA-M-PRESENT-2026</p>
+                  <p className="text-[12px] uppercase font-black tracking-[0.3em] opacity-60 mb-3">Portfolio Ref</p>
+                  <p className="text-xl font-black uppercase tracking-tighter font-heading">DUA-M-PRESENT-2026</p>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
@@ -970,22 +1063,20 @@ export default function App() {
       </AnimatePresence>
 
       {!loading && (
-        <div className="border-[10px] md:border-[16px] border-gold min-h-screen overflow-x-hidden relative flex flex-col">
+        <div className="cinematic-container border-[10px] md:border-[16px] border-gold min-h-screen relative flex flex-col">
           <Navbar />
-          <main className="flex-1">
-            <Hero />
-            <PropertyOverview />
-            <STPAnalysis />
-            <MarketingMix />
-            <PurchaseProcess />
-            <IssuesAndSolutions />
-            <MarketAnalysis />
-            <PresentationAccess />
-            <SpecialistProfile />
-            <Conclusion />
-          </main>
+          <Hero />
+          <PropertyOverview />
+          <STPAnalysis />
+          <MarketingMix />
+          <PurchaseProcess />
+          <IssuesAndSolutions />
+          <MarketAnalysis />
+          <PresentationAccess />
+          <SpecialistProfile />
+          <Conclusion />
 
-          <footer className="py-16 bg-[#0a0a0a] border-t border-white/5 px-12 mt-auto">
+          <footer className="cinematic-section py-24 bg-[#0a0a0a] border-t border-white/5 px-12 mt-auto">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
               <div className="flex flex-col items-center md:items-start text-center md:text-left">
                 <div className="flex items-center gap-3 mb-2">
@@ -1000,8 +1091,8 @@ export default function App() {
               <div className="text-center md:text-right space-y-2">
                 <p className="text-[10px] uppercase tracking-widest font-black text-white/10 uppercase">Strategic Reference Portfolio</p>
                 <div className="flex flex-col gap-1">
-                    <p className="text-xs font-black text-white/40 uppercase tracking-tighter">Nazreena Nadia Binti Mohd Nasir • REN 80782</p>
-                    <p className="text-[9px] text-gold/30 font-black uppercase tracking-widest">Real Estate Specialist Portfolio</p>
+                    <p className="text-sm font-black text-white/60 uppercase tracking-tighter">Nadia Nasir • DREA26022</p>
+                    <p className="text-[10px] text-gold/40 font-black uppercase tracking-widest">Real Estate Specialist Portfolio</p>
                 </div>
               </div>
             </div>
