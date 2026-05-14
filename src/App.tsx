@@ -30,7 +30,18 @@ import {
   Menu, 
   X,
   CreditCard,
-  UserCheck
+  UserCheck,
+  MessageSquare,
+  Eye,
+  Handshake,
+  ClipboardCheck,
+  Briefcase,
+  FileSignature,
+  Key,
+  AlertCircle,
+  Lightbulb,
+  ArrowRight,
+  Monitor
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -42,12 +53,33 @@ import {
   ResponsiveContainer, 
   Cell 
 } from 'recharts';
+import { QRCodeCanvas } from 'qrcode.react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// Helper icon for Globe since I missed importing it
+const Globe = (props: any) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
 
 // --- Data ---
 
@@ -103,6 +135,35 @@ const psData = [
   },
 ];
 
+const purchaseSteps = [
+  { step: 1, title: "Buyer Inquiry", icon: MessageSquare, desc: "Initial engagement via digital channels or direct inquiry." },
+  { step: 2, title: "Property Viewing", icon: Eye, desc: "Personalized showroom tour or immersive virtual reality walkthrough." },
+  { step: 3, title: "Price Negotiation", icon: Handshake, desc: "Professional negotiation to align budget with luxury value." },
+  { step: 4, title: "Booking Confirmation", icon: ClipboardCheck, desc: "Securing unit priority with initial earnest deposit." },
+  { step: 5, title: "Documentation", icon: Briefcase, desc: "Processing legal forms and administrative requirements." },
+  { step: 6, title: "Loan Approval", icon: TrendingUp, desc: "Credit assessment and financing finalized with banking partners." },
+  { step: 7, title: "SPA Signing", icon: FileSignature, desc: "Formal execution of the Sale and Purchase Agreement." },
+  { step: 8, title: "Key Handover", icon: Key, desc: "Official project completion and vacant possession delivery." },
+];
+
+const issues = [
+  { title: "High Competition", icon: AlertCircle, desc: "Saturated market in the Bukit Bintang area." },
+  { title: "Budget Constraints", icon: DollarSign, desc: "Buyer price sensitivity amidst economic shifts." },
+  { title: "Negotiation Barriers", icon: Handshake, desc: "Long decision-making cycles and hard bargaining." },
+  { title: "Economic Volatility", icon: TrendingUp, desc: "Shifting interest rates affecting bank loans." },
+  { title: "Buyer Hesitation", icon: UserCheck, desc: "Market uncertainty leading to slower closings." },
+  { title: "Digital Saturation", icon: Smartphone, desc: "High noise in online property marketing." },
+];
+
+const solutions = [
+  { title: "Viral Engagement", icon: Lightbulb, desc: "Using high-impact TikTok/Reels for top-of-mind recall." },
+  { title: "PSF Strategy", icon: DollarSign, desc: "Aggressive PSM pricing below premium competitors." },
+  { title: "Elite Concierge", icon: UserPlus, desc: "Dedicated support team for superior closing rates." },
+  { title: "Loan Facilitation", icon: Briefcase, desc: "Pre-vetted banking packages for faster approvals." },
+  { title: "Brand Authority", icon: ShieldCheck, desc: "Leveraging developer prestige and physical evidence." },
+  { title: "O2O Strategy", icon: Globe, desc: "Seamless Online-to-Offline lead conversion funnel." },
+];
+
 // --- Components ---
 
 const Navbar = () => {
@@ -120,32 +181,32 @@ const Navbar = () => {
     { name: 'Property', href: '#property' },
     { name: 'STP', href: '#stp' },
     { name: '7Ps', href: '#7ps' },
-    { name: 'Market Analysis', href: '#market' },
-    { name: 'Buyer Journey', href: '#journey' },
-    { name: 'Digital Strategy', href: '#digital' },
-    { name: 'Conclusion', href: '#conclusion' },
+    { name: 'Purchase', href: '#purchase' },
+    { name: 'Issues', href: '#issues' },
+    { name: 'Analysis', href: '#market' },
+    { name: 'Access', href: '#interactive' },
   ];
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 w-full z-50 transition-all duration-300 px-8 py-6",
-      isScrolled ? "bg-black/90 backdrop-blur-xl border-b border-white/10 py-5" : "bg-transparent"
+      "fixed top-0 left-0 w-full z-50 transition-all duration-300 px-8 py-4",
+      isScrolled ? "bg-black/90 backdrop-blur-xl border-b border-white/10 py-3" : "bg-transparent"
     )}>
-      <div className="max-w-7xl mx-auto flex justify-between items-end">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex flex-col">
-          <span className="text-gold text-[10px] font-bold tracking-[0.3em] uppercase mb-1 drop-shadow-sm">EER2253 – Marketing Principles</span>
-          <a href="#home" className="text-3xl font-heading font-black text-white tracking-tighter leading-none">
+          <span className="text-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-0.5 drop-shadow-sm">EER2253 – Marketing Principles</span>
+          <a href="#home" className="text-2xl font-heading font-black text-white tracking-tighter leading-none uppercase">
             DUA M <span className="text-gold">RESIDENCES</span>
           </a>
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex gap-8 items-center mb-1">
+        <div className="hidden lg:flex gap-6 items-center">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-[10px] font-bold uppercase tracking-widest text-white/50 hover:text-gold transition-colors"
+              className="text-[9px] font-bold uppercase tracking-widest text-white/50 hover:text-gold transition-colors"
             >
               {link.name}
             </a>
@@ -154,20 +215,19 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="lg:hidden text-white mb-2"
+          className="lg:hidden text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Mobile Nav Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -10 }}
             className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-b border-gold/20 flex flex-col p-6 gap-4 lg:hidden"
           >
             {navLinks.map((link) => (
@@ -175,7 +235,7 @@ const Navbar = () => {
                 key={link.name} 
                 href={link.href} 
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-white/90 hover:text-gold transition-colors"
+                className="text-sm font-bold uppercase tracking-widest text-white/90 hover:text-gold transition-colors"
               >
                 {link.name}
               </a>
@@ -190,8 +250,7 @@ const Navbar = () => {
 const Hero = () => {
   return (
     <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Background Image with Dark Cinematic Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 text-center">
         <img 
           src="https://images.unsplash.com/photo-1528605248644-14dd04cb11c7?auto=format&fit=crop&q=80&w=2670" 
           alt="Kuala Lumpur Night Skyline" 
@@ -199,7 +258,7 @@ const Hero = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0a0a0a_100%)]"></div>
-        <div className="absolute inset-0 bg-pattern-grid opacity-20"></div>
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
@@ -207,51 +266,54 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-12"
+          className="space-y-8"
         >
           <div className="flex flex-col gap-2 border-l-2 border-gold pl-6">
             <span className="text-gold text-xs font-black tracking-[0.4em] uppercase">Section 01: Hero Presentation</span>
-            <h1 className="text-6xl md:text-8xl font-heading font-black text-white leading-[0.9] tracking-tighter">
-              MODERN URBAN<br />LIVING IN <span className="text-gold">KL</span>
+            <h1 className="text-6xl md:text-9xl font-heading font-black text-white leading-[0.8] tracking-tighter uppercase">
+              Dua M<br />Residences
             </h1>
           </div>
           
-          <p className="text-lg md:text-xl text-white/50 max-w-xl font-medium tracking-wide leading-relaxed">
-            Experience the pinnacle of luxury in Bukit Bintang. A premium serviced residence designed for the modern elite.
-          </p>
+          <div className="space-y-4">
+             <h2 className="text-xl md:text-3xl text-white/70 max-w-2xl font-bold font-heading uppercase tracking-tighter leading-tight">
+                Modern Urban Living in Kuala Lumpur
+             </h2>
+             <p className="text-gold font-black uppercase tracking-[0.2em] text-xs">EER2253 – Principles & Practice of Marketing</p>
+          </div>
 
-          <div className="flex flex-col md:flex-row gap-6 pt-4">
-            <a href="#property" className="group px-8 py-3 bg-gold text-black font-black uppercase tracking-widest text-xs rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(197,160,89,0.4)] text-center">
+          <div className="flex flex-col md:flex-row gap-4 pt-4">
+            <a href="#property" className="group px-12 py-5 bg-gold text-black font-black uppercase tracking-widest text-[11px] rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(197,160,89,0.5)] text-center">
               Explore Property
             </a>
-            <a href="#stp" className="px-8 py-3 border border-white/20 text-white font-black uppercase tracking-widest text-xs rounded-full hover:bg-white/10 transition-all text-center">
-              Marketing Strategy
+            <a href="#stp" className="px-12 py-5 border border-white/20 text-white font-black uppercase tracking-widest text-[11px] rounded-full hover:bg-white/10 transition-all text-center">
+              View Marketing Strategy
             </a>
           </div>
 
-          <div className="pt-20 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="space-y-1">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Presenter</p>
-              <p className="text-white text-xs font-bold font-heading">[Adam Malik Placeholder]</p>
+              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Student Name</p>
+              <p className="text-white text-sm font-black font-heading uppercase">[Adam Malik]</p>
             </div>
             <div className="space-y-1">
               <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Student ID</p>
-              <p className="text-white text-xs font-bold font-heading">[KL-2253-090 Placeholder]</p>
+              <p className="text-white text-sm font-black font-heading uppercase">[KL-2253-090]</p>
             </div>
             <div className="col-span-2 space-y-1">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Course</p>
-              <p className="text-white text-xs font-bold font-heading">Diploma in Real Estate Agency</p>
+              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Presentation Venue</p>
+              <p className="text-white text-sm font-black font-heading uppercase">Bukit Bintang CBD Contextual Analysis</p>
             </div>
           </div>
         </motion.div>
 
         <motion.div 
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="absolute bottom-10 right-8 text-white/20 flex flex-col items-center gap-2"
         >
-          <span className="text-[9px] uppercase tracking-[0.5em] font-black rotate-90 mb-8 origin-right">Scroll</span>
-          <div className="w-[1px] h-12 bg-white/20" />
+          <span className="text-[8px] uppercase tracking-[0.5em] font-black rotate-90 mb-8 origin-right opacity-30">Scroll Down</span>
+          <div className="w-[1px] h-12 bg-white/10" />
         </motion.div>
       </div>
     </section>
@@ -259,20 +321,20 @@ const Hero = () => {
 };
 
 const SectionHeader = ({ title, subtitle, light = false }: { title: string, subtitle?: string, light?: boolean }) => (
-  <div className="mb-16 space-y-6 flex flex-col">
+  <div className="mb-10 space-y-3 flex flex-col">
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
+      initial={{ opacity: 0, x: -15 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       className="space-y-4"
     >
       <div className="flex items-center gap-4">
         <div className="h-[2px] w-12 bg-gold" />
-        <h2 className={cn("text-3xl md:text-5xl font-heading font-black uppercase tracking-tighter", light ? "text-white" : "text-black")}>
+        <h2 className={cn("text-4xl md:text-7xl font-heading font-black uppercase tracking-tighter leading-none", light ? "text-white" : "text-black")}>
           {title}
         </h2>
       </div>
-      {subtitle && <p className={cn("text-lg font-medium tracking-tight max-w-3xl", light ? "text-white/50" : "text-gray-500")}>{subtitle}</p>}
+      {subtitle && <p className={cn("text-base md:text-lg font-medium tracking-tight max-w-3xl leading-relaxed uppercase tracking-tighter opacity-60", light ? "text-white" : "text-gray-600")}>{subtitle}</p>}
     </motion.div>
   </div>
 );
@@ -280,71 +342,73 @@ const SectionHeader = ({ title, subtitle, light = false }: { title: string, subt
 const PropertyOverview = () => {
   const specs = [
     { icon: MapPin, label: "Location", value: "Bukit Bintang" },
-    { icon: Maximize2, label: "Size", value: "850 – 1,200 sqft" },
-    { icon: BedDouble, label: "Units", value: "2 – 3 Bedrooms" },
+    { icon: Maximize2, label: "Area", value: "850 – 1,200 sqft" },
+    { icon: BedDouble, label: "Layout", value: "2 – 3 Bedrooms" },
   ];
 
   return (
-    <section id="property" className="py-24 bg-white px-8">
+    <section id="property" className="py-20 bg-white px-8 relative">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader title="Property Overview" subtitle="Defined by elegance, designed for the future." />
+        <SectionHeader title="Property Details" subtitle="High-demand serviced residences in Kuala Lumpur's strategic heart." />
         
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-12 rounded-3xl overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] p-8 md:p-12 text-white flex flex-col md:flex-row justify-between items-center gap-12 group"
+            className="lg:col-span-12 rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] p-10 md:p-16 text-white flex flex-col md:flex-row justify-between items-center gap-12 group shadow-[0_40px_80px_rgba(0,0,0,0.15)]"
           >
-            <div className="order-2 md:order-1 space-y-8 flex-1">
-              <div className="px-5 py-2 border border-gold rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Exquisite Residence</div>
-              <h3 className="text-4xl md:text-6xl font-heading font-black leading-tight tracking-tighter">
-                THE PINNACLE<br /> OF <span className="text-gold">URBAN STYLE</span>
+            <div className="order-2 md:order-1 space-y-10 flex-1">
+              <div className="px-6 py-2 border border-gold/40 rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Section 02: Overview</div>
+              <h3 className="text-5xl md:text-7xl font-heading font-black leading-[0.85] tracking-tighter uppercase">
+                Modern<br /> <span className="text-gold">Urban Living</span>
               </h3>
-              <p className="text-white/40 max-w-md font-medium text-sm leading-relaxed">
-                Experience luxury redefined in Bukit Bintang. Our serviced residences combine high-end aesthetic with strategic connectivity.
+              <p className="text-white/30 max-w-md font-medium text-sm leading-relaxed uppercase tracking-tighter">
+                Designed for the high-performing professional. Strategic Bukit Bintang proximity ensures consistent rental yield and asset appreciation.
               </p>
               
-              <div className="flex gap-10 items-center border-t border-white/10 pt-8">
+              <div className="flex gap-10 items-center border-t border-white/5 pt-10">
                 {specs.map((item, idx) => (
-                  <div key={idx} className="flex flex-col gap-1">
-                    <span className="text-[9px] text-white/30 uppercase tracking-widest font-black">{item.label}</span>
-                    <span className="text-sm font-black font-heading">{item.value}</span>
+                  <div key={idx} className="flex flex-col gap-1.5">
+                    <span className="text-[9px] text-white/20 uppercase tracking-widest font-black">{item.label}</span>
+                    <span className="text-sm font-black font-heading uppercase">{item.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="order-1 md:order-2 flex-shrink-0 w-full md:w-1/2 aspect-video overflow-hidden rounded-2xl border border-white/10">
+            <div className="order-1 md:order-2 flex-shrink-0 w-full md:w-3/5 aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/5 shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?auto=format&fit=crop&q=80&w=2670" 
-                alt="Luxury Infinity Pool with city view" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=2670" 
+                alt="Luxury condo interior view" 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
             </div>
           </motion.div>
 
           {/* Sub-features grid */}
-          {[
-            { icon: Dumbbell, title: "Sky Gym", text: "Elite fitness studio with KL views." },
-            { icon: Waves, title: "Infinite Pool", titleColor: "text-gold", text: "Relax at the heart of the city." },
-            { icon: ShieldCheck, title: "24H Security", text: "Multi-tier safety for your peace." }
-          ].map((feat, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="lg:col-span-4 bg-gray-50 rounded-2xl border border-gray-100 p-8 hover:shadow-xl transition-all"
-            >
-              <div className="w-12 h-12 rounded-xl bg-black text-gold flex items-center justify-center mb-6">
-                <feat.icon size={24} />
-              </div>
-              <h4 className={cn("text-xl font-heading font-black uppercase mb-2", feat.titleColor || "text-black")}>{feat.title}</h4>
-              <p className="text-sm text-gray-500 font-medium">{feat.text}</p>
-            </motion.div>
-          ))}
+          <div className="lg:col-span-12 grid md:grid-cols-3 gap-6">
+            {[
+              { icon: Dumbbell, title: "Elite Sky Gym", text: "High-spec fitness studio with direct CBD vistas." },
+              { icon: Waves, title: "Panoramic Pool", text: "Bukit Bintang skyline panoramic relaxation deck." },
+              { icon: ShieldCheck, title: "Security 24/7", text: "Multi-tier high-tech surveillance and on-site guards." }
+            ].map((feat, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-gray-50 rounded-2xl border border-gray-100 p-10 hover:bg-white hover:shadow-2xl transition-all group"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-black text-gold flex items-center justify-center mb-8 transition-all group-hover:rotate-6">
+                  <feat.icon size={22} />
+                </div>
+                <h4 className="text-xl font-heading font-black uppercase mb-3 text-black tracking-tighter">{feat.title}</h4>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-tighter leading-relaxed">{feat.text}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -357,65 +421,64 @@ const STPAnalysis = () => {
       title: "Segmentation",
       icon: Users,
       points: [
-        "Young Professionals searching for urban convenience",
-        "Middle-class families seeking quality living space",
-        "Local & International property investors"
+        "Urban Young Professionals",
+        "Modern Families & Couples",
+        "Strategic Property Investors"
       ]
     },
     {
       title: "Targeting",
       icon: Target,
       points: [
-        "Age Range: 25 – 40 years old",
-        "Working adults in KL CBD & financial districts",
-        "First-time homebuyers with lifestyle aspirations"
+        "Age 25 – 45 (CBD Workers)",
+        "Household Income: RM8k – 15k+",
+        "Tech-savvy Home Seekers"
       ]
     },
     {
       title: "Positioning",
       icon: Compass,
       points: [
-        "Modern urban lifestyle with premium facilities",
-        "Strategic price-to-location value proposition",
-        "Strong rental yields and investment potential"
+        "Luxury Urban Value Concept",
+        "Strategic Connectivity Focus",
+        "Premier Investment Opportunity"
       ]
     }
   ];
 
   return (
-    <section id="stp" className="py-24 bg-[#0a0a0a] px-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-pattern-gold opacity-5"></div>
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold/5 blur-[150px] rounded-full -mr-96 -mt-96"></div>
+    <section id="stp" className="py-20 bg-[#0a0a0a] px-8 relative overflow-hidden">
+      <div className="absolute inset-0 bg-patterns opacity-5"></div>
       <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeader title="STP Analysis" subtitle="Segmentation, Targeting, and Positioning framework." light />
+        <SectionHeader title="STP Analysis" subtitle="Framework for market segmentation, targeting, and refined positioning." light />
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {cards.map((card, idx) => (
             <motion.div 
               key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white/5 border border-white/10 p-10 rounded-3xl group hover:border-gold/30 transition-all duration-500"
+              className="bg-white/5 border border-white/5 p-12 rounded-[2.5rem] group hover:border-gold/30 transition-all duration-700"
             >
-              <div className="flex flex-col gap-8 h-full">
+              <div className="flex flex-col gap-10 h-full">
                 <div className="flex justify-between items-start">
-                  <span className="text-[10px] font-black text-white/30 uppercase tracking-widest">Section 03: Strategy</span>
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gold border border-white/5 group-hover:bg-gold group-hover:text-black transition-all">
-                    <card.icon size={24} />
+                  <span className="text-[10px] font-black text-white/20 uppercase tracking-widest">Section 03</span>
+                  <div className="w-12 h-12 rounded-2xl bg-white/3 flex items-center justify-center text-gold border border-white/5 group-hover:bg-gold group-hover:text-black transition-all">
+                    <card.icon size={22} />
                   </div>
                 </div>
                 
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-heading font-black text-white uppercase tracking-tighter">{card.title}</h3>
-                  <div className="h-[2px] w-8 bg-gold group-hover:w-16 transition-all" />
+                  <h3 className="text-3xl font-heading font-black text-white uppercase tracking-tighter leading-none">{card.title}</h3>
+                  <div className="h-0.5 w-8 bg-gold group-hover:w-16 transition-all duration-500" />
                 </div>
 
-                <div className="space-y-5">
+                <div className="space-y-4">
                   {card.points.map((point, pIdx) => (
-                    <div key={pIdx} className="p-4 bg-white/5 border-l-2 border-white/10 group-hover:border-gold rounded-r-xl transition-all">
-                      <p className="text-xs text-white/50 font-bold leading-relaxed">{point}</p>
+                    <div key={pIdx} className="p-5 bg-white/3 border-l-2 border-white/10 group-hover:border-gold rounded-r-2xl transition-all">
+                      <p className="text-[11px] text-white/40 font-black uppercase tracking-tighter leading-relaxed">{point}</p>
                     </div>
                   ))}
                 </div>
@@ -430,39 +493,39 @@ const STPAnalysis = () => {
 
 const MarketingMix = () => {
   return (
-    <section id="7ps" className="py-24 bg-white px-8 relative">
+    <section id="7ps" className="py-20 bg-white px-8 relative">
       <div className="absolute inset-0 bg-gray-50/50 pointer-events-none"></div>
       <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeader title="7Ps Marketing Mix" subtitle="A comprehensive strategy for market dominance." />
+        <SectionHeader title="Marketing Mix" subtitle="The 7Ps strategic framework for property success." />
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {psData.map((p, idx) => (
             <motion.div 
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
               className={cn(
-                "bg-[#0a0a0a] p-8 rounded-2xl border border-white/5 group hover:border-gold/50 transition-all duration-500",
+                "bg-[#0a0a0a] p-10 rounded-3xl border border-white/5 group hover:border-gold/30 transition-all duration-500",
                 idx === 0 ? "lg:col-span-2" : ""
               )}
             >
               <div className="flex flex-col h-full gap-8">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-heading font-black text-gold uppercase tracking-tighter">{p.title}</h3>
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/30 group-hover:text-gold transition-colors">
+                  <h3 className="text-2xl font-heading font-black text-gold uppercase tracking-tighter leading-none">{p.title}</h3>
+                  <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-white/30 group-hover:text-gold transition-colors">
                     <p.icon size={20} />
                   </div>
                 </div>
                 
-                <p className="text-white/40 font-medium text-[11px] leading-relaxed">
+                <p className="text-white/40 font-medium text-xs leading-relaxed uppercase tracking-tighter">
                   {p.content}
                 </p>
 
                 <div className="space-y-2 mt-auto">
                   {p.details.map((detail, dIdx) => (
-                    <div key={dIdx} className="p-3 bg-white/5 border border-white/5 rounded-lg text-[9px] font-bold uppercase tracking-widest text-white/30 group-hover:text-white transition-colors">
+                    <div key={dIdx} className="px-4 py-3 bg-white/3 border border-white/3 rounded-xl text-[9px] font-black uppercase tracking-[0.05em] text-white/20 group-hover:text-white transition-colors">
                       {detail}
                     </div>
                   ))}
@@ -476,108 +539,121 @@ const MarketingMix = () => {
   );
 };
 
+const PurchaseProcess = () => {
+  return (
+    <section id="purchase" className="py-20 bg-[#0a0a0a] px-8 relative overflow-hidden border-y border-white/5">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <SectionHeader title="Sales Process" subtitle="Transparent 8-step journey from inquiry to final handover." light />
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+           {purchaseSteps.map((step, idx) => (
+             <motion.div 
+               key={idx}
+               initial={{ opacity: 0, y: 10 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               transition={{ delay: idx * 0.05 }}
+               className="bg-white/3 border border-white/3 p-10 rounded-3xl group hover:border-gold/40 transition-all duration-500"
+             >
+                <div className="space-y-8">
+                  <div className="flex justify-between items-start">
+                    <div className="text-gold font-black font-heading text-4xl opacity-10">0{step.step}</div>
+                    <div className="w-11 h-11 rounded-2xl bg-white/5 flex items-center justify-center text-gold group-hover:rotate-6 transition-all">
+                      <step.icon size={22} />
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h4 className="text-base font-heading font-black text-white uppercase tracking-widest leading-none">{step.title}</h4>
+                    <p className="text-[10px] text-white/30 font-medium leading-relaxed uppercase tracking-tighter">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+             </motion.div>
+           ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const MarketAnalysis = () => {
   return (
-    <section id="market" className="py-24 bg-white px-8">
+    <section id="market" className="py-20 bg-white px-8">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader title="Market Analysis" subtitle="Data-driven positioning and competitive pricing strategy." />
+        <SectionHeader title="Market Analysis" subtitle="Data-driven intelligence for professional pricing & positioning." />
         
-        <div className="grid lg:grid-cols-3 gap-4 mb-16">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-[#0a0a0a] p-10 rounded-2xl border border-white/5 flex flex-col justify-between h-[280px] group hover:border-gold/30 transition-all"
-          >
-            <div className="flex justify-between items-start">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Metric 01</p>
-              <BarChart3 className="text-gold opacity-20 group-hover:opacity-100 transition-opacity" size={24} />
-            </div>
-            <div>
-              <p className="text-white/50 text-xs uppercase tracking-widest font-bold mb-2">Price Range</p>
-              <h4 className="text-4xl text-white font-heading font-black tracking-tighter">RM450k – 600k</h4>
-            </div>
-            <div className="pt-6 border-t border-white/5">
-              <p className="text-gold text-[10px] font-black uppercase tracking-widest">Mid-market Luxury Sweet Spot</p>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="bg-[#0a0a0a] p-10 rounded-2xl border border-gold/20 flex flex-col justify-between h-[280px] group hover:bg-gold/5 transition-all"
-          >
-            <div className="flex justify-between items-start">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Metric 02</p>
-              <TrendingUp className="text-gold" size={24} />
-            </div>
-            <div>
-              <p className="text-white/50 text-xs uppercase tracking-widest font-bold mb-2">Recommended Price</p>
-              <h4 className="text-4xl text-white font-heading font-black tracking-tighter">RM470 – 490 <span className="text-lg opacity-30">psf</span></h4>
-            </div>
-            <div className="pt-6 border-t border-white/5">
-              <p className="text-gold text-[10px] font-black uppercase tracking-widest">Aggressive Competitive Entry</p>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="bg-[#0a0a0a] p-10 rounded-2xl border border-white/5 flex flex-col justify-between h-[280px] group hover:border-gold/30 transition-all"
-          >
-            <div className="flex justify-between items-start">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Metric 03</p>
-              <div className="text-gold text-2xl font-black">+42%</div>
-            </div>
-            <div>
-              <p className="text-white/50 text-xs uppercase tracking-widest font-bold mb-2">Project Yield</p>
-              <h4 className="text-4xl text-white font-heading font-black tracking-tighter">5.8 – 6.5%</h4>
-            </div>
-            <div className="pt-6 border-t border-white/5">
-              <p className="text-gold text-[10px] font-black uppercase tracking-widest">Projected Annual Return</p>
-            </div>
-          </motion.div>
+        <div className="grid lg:grid-cols-3 gap-6 mb-12">
+          {[
+            { metric: "Metric 01", label: "Price Range", value: "RM450k – 600k", note: "Mid-market Luxury Sweet Spot", icon: BarChart3 },
+            { metric: "Metric 02", label: "Recommended Price", value: "RM470 – 490 psf", note: "Aggressive Competitive Entry", icon: TrendingUp },
+            { metric: "Metric 03", label: "Project Yield", value: "5.8 – 6.5%", note: "Projected Annual Return", icon: Target }
+          ].map((item, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-[#0a0a0a] p-12 rounded-[2rem] border border-white/5 flex flex-col justify-between h-[300px] group hover:border-gold/40 transition-all shadow-2xl"
+            >
+              <div className="flex justify-between items-start">
+                <p className="text-white/20 text-[10px] uppercase tracking-widest font-black">{item.metric}</p>
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gold opacity-30 group-hover:opacity-100 transition-opacity">
+                  <item.icon size={20} />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-white/40 text-[11px] uppercase tracking-widest font-black">{item.label}</p>
+                <h4 className="text-4xl text-white font-heading font-black tracking-tighter uppercase leading-none">{item.value}</h4>
+              </div>
+              <div className="pt-8 border-t border-white/5">
+                <p className="text-gold text-[10px] font-black uppercase tracking-[0.2em]">{item.note}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="bg-[#0a0a0a] rounded-[2rem] p-8 md:p-16 border border-white/5 text-white">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
-            <div className="space-y-4">
-              <div className="px-5 py-2 border border-gold/30 rounded-full inline-block text-[9px] text-gold font-black uppercase tracking-[0.2em]">Financial Intelligence</div>
-              <h3 className="text-3xl md:text-5xl font-heading font-black tracking-tighter">PRICING COMPARISON</h3>
-              <p className="text-white/30 font-medium max-w-sm text-sm">Target vs. Local Market Competitors analysis based on Q1 2026 data.</p>
+        <div className="bg-[#0a0a0a] rounded-[3rem] p-12 md:p-20 border border-white/3 text-white overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gold/5 blur-[100px] rounded-full -mr-32 -mt-32"></div>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 relative z-10">
+            <div className="space-y-6">
+              <div className="px-6 py-2 border border-gold/30 rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Financial Intelligence</div>
+              <h3 className="text-4xl md:text-6xl font-heading font-black tracking-tighter uppercase leading-none">Competitive<br />Positioning</h3>
+              <p className="text-white/20 font-medium max-w-sm text-sm leading-relaxed uppercase tracking-tighter">Target vs. Local Market Competitors analysis based on Q1 2026 data.</p>
+            </div>
+            <div className="p-6 bg-white/3 border border-white/5 rounded-3xl text-right">
+               <p className="text-[10px] text-gold font-black uppercase tracking-widest mb-1">Status</p>
+               <p className="text-xl font-heading font-black text-white uppercase tracking-tighter">Verified Data</p>
             </div>
           </div>
 
-          <div className="h-[400px] w-full mt-10">
+          <div className="h-[400px] w-full mt-10 relative z-10">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={cmaData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff10" />
+              <BarChart data={cmaData} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
                 <XAxis 
                   dataKey="name" 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#ffffff50', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}
-                  dy={10}
+                  tick={{ fill: '#ffffff30', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                  dy={15}
                 />
                 <YAxis 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#ffffff30', fontSize: 10 }}
+                  tick={{ fill: '#ffffff15', fontSize: 10 }}
                   tickFormatter={(val) => `RM ${(val / 1000)}k`}
                 />
                 <Tooltip 
-                  cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }}
-                  contentStyle={{ backgroundColor: '#111', border: '1px solid #C5A05930', borderRadius: '16px', padding: '16px' }}
+                  cursor={{ fill: 'rgba(255, 255, 255, 0.03)' }}
+                  contentStyle={{ backgroundColor: '#111', border: '1px solid #C5A05930', borderRadius: '20px', padding: '16px' }}
                   itemStyle={{ color: '#C5A059', fontWeight: 900, textTransform: 'uppercase', fontSize: '10px' }}
-                  labelStyle={{ color: '#fff', marginBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px', fontWeight: 900, fontSize: '12px' }}
+                  labelStyle={{ color: '#fff', marginBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '8px', fontWeight: 900, fontSize: '12px' }}
                 />
                 <Bar dataKey="price" radius={[4, 4, 0, 0]} barSize={50}>
                   {cmaData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.name === 'Dua M Residences' ? '#C5A059' : '#ffffff20'} />
+                    <Cell key={`cell-${index}`} fill={entry.name === 'Dua M Residences' ? '#C5A059' : '#ffffff10'} />
                   ))}
                 </Bar>
               </BarChart>
@@ -589,69 +665,57 @@ const MarketAnalysis = () => {
   );
 };
 
-const ConsumerBehaviour = () => {
-  const steps = [
-    { 
-      title: "Search", 
-      desc: "Digital awareness.", 
-      icon: Search 
-    },
-    { 
-      title: "Evaluate", 
-      desc: "Comparative ROI.", 
-      icon: BarChart3 
-    },
-    { 
-      title: "Aspire", 
-      desc: "Emotional fit.", 
-      icon: BookOpen 
-    },
-    { 
-      title: "Decide", 
-      desc: "Logical closure.", 
-      icon: UserCheck 
-    },
-    { 
-      title: "Advocacy", 
-      desc: "Social proof.", 
-      icon: Users 
-    },
-  ];
-
+const IssuesAndSolutions = () => {
   return (
-    <section id="journey" className="py-24 bg-[#0a0a0a] px-8">
+    <section id="issues" className="py-20 bg-gray-50 px-8">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader title="Buyer Journey" subtitle="Mapping the psychological path to ownership." light />
-        
-        <div className="relative pt-12">
-          {/* Horizontal Line for Desktop */}
-          <div className="hidden lg:block absolute top-[110px] left-0 w-full h-[1px] bg-white/5" />
-          
-          <div className="grid md:grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-6">
-            {steps.map((step, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="relative flex flex-col items-center text-center group"
-              >
-                <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 transition-all duration-500 group-hover:scale-110 group-hover:border-gold group-hover:bg-gold group-hover:text-black text-white/50">
-                  <step.icon size={20} />
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-black text-gold/30 group-hover:text-white uppercase tracking-[0.3em] transition-colors">
-                    Phase {idx + 1}
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Issues */}
+          <div>
+            <SectionHeader title="Issues Faced" subtitle="Analyzing market constraints and buyer cycle friction points." />
+            <div className="grid sm:grid-cols-2 gap-4">
+              {issues.map((item, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="p-8 bg-white border border-gray-100 rounded-[2rem] flex flex-col gap-6 group hover:bg-black transition-all duration-700"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-black group-hover:bg-gold transition-colors">
+                    <item.icon size={20} />
                   </div>
-                </div>
-                
-                <div className="mt-8 space-y-2">
-                  <h3 className="text-sm font-heading font-black text-white uppercase tracking-widest">{step.title}</h3>
-                  <p className="text-white/30 font-medium text-[10px] uppercase tracking-tighter max-w-[120px] mx-auto">
-                    {step.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                  <div className="space-y-2">
+                    <h5 className="text-sm font-black uppercase text-black group-hover:text-white transition-colors tracking-tight leading-none">{item.title}</h5>
+                    <p className="text-[10px] text-gray-500 group-hover:text-white/30 uppercase font-bold tracking-tight leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Solutions */}
+          <div className="flex flex-col">
+            <SectionHeader title="Strategic Solutions" subtitle="Interventions designed for rapid market penetration." />
+            <div className="grid sm:grid-cols-2 gap-4">
+              {solutions.map((item, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="p-8 bg-gold rounded-[2rem] flex flex-col gap-6 group hover:bg-black transition-all duration-700 shadow-xl"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all">
+                    <item.icon size={20} />
+                  </div>
+                  <div className="space-y-2">
+                    <h5 className="text-sm font-black uppercase text-black group-hover:text-white transition-colors tracking-tight leading-none">{item.title}</h5>
+                    <p className="text-[10px] text-black/60 group-hover:text-white/30 transition-colors uppercase font-bold tracking-tight leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -659,82 +723,63 @@ const ConsumerBehaviour = () => {
   );
 };
 
-const DigitalStrategy = () => {
-  const strategies = [
-    { name: "Facebook Ads", icon: Facebook, color: "text-blue-400" },
-    { name: "Instagram Reels", icon: Instagram, color: "text-pink-400" },
-    { name: "TikTok Content", icon: Search, color: "text-white" },
-    { name: "SEO Rank", icon: TrendingUp, color: "text-green-400" },
-    { name: "Email Funnel", icon: Mail, color: "text-yellow-400" },
-    { name: "iProperty/Guru", icon: Building2, color: "text-red-400" },
-  ];
+const PresentationAccess = () => {
+  const [appUrl, setAppUrl] = useState('');
+
+  useEffect(() => {
+    setAppUrl(window.location.href);
+  }, []);
 
   return (
-    <section id="digital" className="py-24 bg-white px-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeader title="Digital Strategy" subtitle="Dominating the landscape with high-impact visuals." />
-        
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-          <div className="lg:col-span-12 grid lg:grid-cols-2 gap-12 items-center bg-[#0a0a0a] rounded-[2.5rem] p-8 md:p-16 text-white border border-white/5 relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 blur-[120px] rounded-full -mr-64 -mt-64" />
-            
-            <div className="space-y-10 relative z-10">
-              <div className="space-y-4">
-                <div className="px-5 py-2 border border-gold/30 rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Social Influence</div>
-                <h3 className="text-4xl md:text-6xl font-heading font-black tracking-tighter leading-tight uppercase">
-                  Data-Driven<br />Engagement
-                </h3>
-                <p className="text-white/30 font-medium max-w-md text-sm leading-relaxed">
-                  Leveraging precision targeting and viral storytelling to ensure consistent brand recall among high-intent buyers.
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-3">
-                {strategies.map((item, idx) => (
-                  <motion.div 
-                    key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.05 }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all group"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white/30 group-hover:bg-gold group-hover:text-black transition-all">
-                      <item.icon size={18} />
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/50 group-hover:text-white">{item.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative hidden lg:block"
-            >
-              <div className="w-full aspect-[4/3] bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/10 overflow-hidden group p-1 shadow-2xl">
-                <div className="w-full h-full bg-black rounded-[1.4rem] overflow-hidden relative">
-                   <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=2670" alt="Modern interior marketing shot" className="w-full h-full object-cover opacity-60" />
-                   <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 p-8 flex flex-col justify-end">
-                      <div className="flex justify-between items-end">
-                        <div className="space-y-2">
-                          <div className="px-3 py-1 bg-gold text-black text-[9px] font-black rounded-full inline-block">AD PERFORMANCE</div>
-                          <div className="text-3xl font-heading font-black">2.4M+</div>
-                          <div className="text-[10px] text-white/40 uppercase font-black tracking-widest">Monthly Impressions</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-gold text-2xl font-black">+127%</div>
-                          <div className="text-[10px] text-white/40 uppercase font-black tracking-widest">Engagement</div>
-                        </div>
-                      </div>
+    <section id="interactive" className="py-20 bg-[#0a0a0a] px-8 relative overflow-hidden">
+      <div className="absolute inset-0 bg-patterns opacity-5"></div>
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold/5 blur-[150px] rounded-full -mr-96 -mt-96"></div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col items-center text-center space-y-16">
+          <SectionHeader title="Interactive Access" subtitle="Scan to access the full marketing dossier instantly." light />
+          
+          <motion.div 
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+             className="relative p-1.5 bg-gold rounded-[3.5rem] shadow-[0_0_120px_rgba(197,160,89,0.4)]"
+          >
+             <div className="bg-[#111] p-16 md:p-24 rounded-[3.2rem] flex flex-col items-center gap-12">
+                <div className="relative group">
+                   <div className="absolute -inset-8 bg-gold/15 blur-2xl rounded-full animate-pulse transition-all group-hover:bg-gold/25 group-hover:blur-3xl"></div>
+                   <div className="relative p-8 bg-white rounded-[3rem] border-[16px] border-black shadow-2xl group-hover:scale-105 transition-transform duration-1000 ease-out">
+                      {appUrl && (
+                        <QRCodeCanvas 
+                          value={appUrl} 
+                          size={280} 
+                          level="H" 
+                          includeMargin={false}
+                          className="rounded-2xl"
+                        />
+                      )}
                    </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+
+                <div className="space-y-8 text-center max-w-md">
+                   <div className="flex justify-center gap-6">
+                      <Smartphone className="text-gold" size={28} />
+                      <Monitor className="text-white/20" size={28} />
+                   </div>
+                   <h3 className="text-2xl md:text-3xl font-heading font-black text-white uppercase tracking-tighter leading-[0.9]">
+                      Scan to view interactive<br />Marketing presentation
+                   </h3>
+                   <div className="py-4 px-8 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-gold animate-ping" />
+                      <p className="text-[10px] text-white/40 font-black uppercase tracking-widest font-heading">
+                        Ready for instant review
+                      </p>
+                   </div>
+                   <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.4em] leading-relaxed">
+                      Best viewed on desktop or modern mobile browsers<br />Optimized for projector presentation
+                   </p>
+                </div>
+             </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -743,42 +788,41 @@ const DigitalStrategy = () => {
 
 const Conclusion = () => {
   return (
-    <section id="conclusion" className="relative min-h-[80vh] flex items-center justify-center py-24 px-8 overflow-hidden">
+    <section id="conclusion" className="relative min-h-[90vh] flex items-center justify-center py-20 px-8 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
           src="https://images.unsplash.com/photo-1595171708811-6677f4e85741?auto=format&fit=crop&q=80&w=2670" 
           alt="Aerial view of Kuala Lumpur at sunset" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/20"></div>
-        <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/95 to-[#0a0a0a]/30"></div>
+        <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-10"
+            className="space-y-12"
           >
-            <div className="px-6 py-2 border border-gold rounded-full inline-block">
+            <div className="px-8 py-3 border border-gold rounded-full inline-block">
               <span className="text-gold text-xs uppercase tracking-[0.5em] font-black">Strategic Conclusion</span>
             </div>
             
-            <h2 className="text-4xl md:text-7xl font-heading font-black text-white leading-[0.9] tracking-tighter uppercase">
-              Strong Future<br />
-              <span className="text-gold">Growth</span> Asset
+            <h2 className="text-6xl md:text-9xl font-heading font-black text-white leading-[0.8] tracking-tighter uppercase">
+              The Path<br />To <span className="text-gold">Success</span>
             </h2>
 
-            <div className="space-y-6 max-w-md">
-              <div className="p-6 bg-white/5 border-l-2 border-gold rounded-r-xl">
-                 <h4 className="text-gold text-xs font-black uppercase tracking-widest mb-1">Final Verdict</h4>
-                 <p className="text-white/40 text-xs font-medium leading-relaxed uppercase tracking-tighter">Prime location proximity ensures consistent appreciation and high retention from urban markets.</p>
+            <div className="space-y-8 max-w-md">
+              <div className="p-8 bg-white/3 border-l-4 border-gold rounded-r-[2rem] shadow-2xl">
+                 <h4 className="text-gold text-xs font-black uppercase tracking-widest mb-2">Final Asset Verdict</h4>
+                 <p className="text-white/40 text-[11px] font-black leading-relaxed uppercase tracking-tighter">Prime location proximity ensures consistent appreciation and high market retention in the long term.</p>
               </div>
-              <div className="p-6 bg-white/5 border-l-2 border-white/20 rounded-r-xl">
-                 <h4 className="text-white/80 text-xs font-black uppercase tracking-widest mb-1">Marketing Synergy</h4>
-                 <p className="text-white/40 text-xs font-medium leading-relaxed uppercase tracking-tighter tracking-tighter">Omnichannel digital execution guarantees top-of-mind brand recall and rapid sales conversions.</p>
+              <div className="p-8 bg-white/3 border-l-4 border-white/10 rounded-r-[2rem]">
+                 <h4 className="text-white/80 text-xs font-black uppercase tracking-widest mb-2">Marketing Synergy</h4>
+                 <p className="text-white/40 text-[11px] font-black leading-relaxed uppercase tracking-tighter">Omnichannel digital execution guarantees top-of-mind brand recall and rapid sales conversions.</p>
               </div>
             </div>
           </motion.div>
@@ -787,32 +831,37 @@ const Conclusion = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-gold rounded-[2.5rem] p-10 md:p-16 text-black flex flex-col justify-between h-full min-h-[450px]"
+            className="bg-gold rounded-[4rem] p-16 md:p-24 text-black flex flex-col justify-between h-full min-h-[550px] shadow-[0_50px_100px_rgba(0,0,0,0.3)] relative overflow-hidden"
           >
-            <div className="space-y-8">
-              <h3 className="text-6xl font-heading font-black tracking-tighter leading-none uppercase">Thank<br />You</h3>
-              <div className="w-16 h-2 bg-black rounded-full" />
+             <div className="absolute top-0 right-0 p-16 opacity-10">
+                <TrendingUp size={160} />
+             </div>
+
+            <div className="space-y-8 relative z-10">
+              <h3 className="text-8xl md:text-9xl font-heading font-black tracking-tighter leading-none uppercase">Thank<br />You</h3>
+              <div className="w-24 h-4 bg-black rounded-full" />
+              <p className="text-sm font-black uppercase tracking-[0.2em] opacity-40">End of Presentation Dossier</p>
             </div>
 
-            <div className="space-y-8 mt-12">
-              <div className="flex gap-8 items-center border-b border-black/10 pb-8">
-                <div className="w-24 h-24 bg-black rounded-2xl flex items-center justify-center p-2">
-                   <div className="w-full h-full border border-dashed border-white/20 flex items-center justify-center text-[6px] text-white/40 font-black uppercase">QR CODE</div>
+            <div className="space-y-12 mt-16 relative z-10">
+              <div className="flex gap-10 items-center border-b border-black/10 pb-10">
+                <div className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center">
+                    <p className="text-gold text-2xl font-black font-heading">#1</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-[10px] uppercase font-black tracking-widest opacity-60">Scan for Presentation</p>
-                  <p className="text-lg font-black font-heading leading-tight uppercase tracking-tighter">Digital Dossier<br />Available Now</p>
+                  <p className="text-xs uppercase font-black tracking-widest opacity-60">Academic Summary</p>
+                  <p className="text-2xl font-black font-heading leading-tight uppercase tracking-tighter">Adam Malik • KL-2253-090</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-2 gap-12">
                 <div>
-                  <p className="text-[9px] uppercase font-black tracking-[0.2em] opacity-60 mb-1">Presenter</p>
-                  <p className="text-xs font-black uppercase tracking-tighter font-heading">Adam Malik</p>
+                  <p className="text-[10px] uppercase font-black tracking-[0.2em] opacity-60 mb-2">Subject</p>
+                  <p className="text-base font-black uppercase tracking-tighter font-heading">EER2253 Principles & Practice of Marketing</p>
                 </div>
-                <div>
-                  <p className="text-[9px] uppercase font-black tracking-[0.2em] opacity-60 mb-1">ID Code</p>
-                  <p className="text-xs font-black uppercase tracking-tighter font-heading">KL-2253-090</p>
+                <div className="text-right flex flex-col items-end">
+                  <p className="text-[10px] uppercase font-black tracking-[0.2em] opacity-60 mb-2">Ref Code</p>
+                  <p className="text-base font-black uppercase tracking-tighter font-heading">DUA-M-PRESENT-2026</p>
                 </div>
               </div>
             </div>
@@ -841,44 +890,57 @@ export default function App() {
             key="loader"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-[#0a0a0a] flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-[#0a0a0a] flex flex-col items-center justify-center p-12"
           >
             <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="space-y-4 flex flex-col items-center"
+              className="space-y-8 flex flex-col items-center text-center"
             >
-              <div className="w-12 h-12 border-t-2 border-gold rounded-full animate-spin mb-4" />
-              <h2 className="text-2xl font-heading font-black text-white tracking-widest uppercase">
-                DUA M <span className="text-gold">RESIDENCES</span>
-              </h2>
+              <div className="w-12 h-12 border-t-2 border-gold rounded-full animate-spin mb-6" />
+              <div className="space-y-3">
+                <h2 className="text-4xl font-heading font-black text-white tracking-widest uppercase">
+                  DUA M <span className="text-gold">RESIDENCES</span>
+                </h2>
+                <div className="flex items-center gap-3 justify-center">
+                    <div className="h-[1px] w-8 bg-white/10" />
+                    <p className="text-[10px] text-white/30 uppercase font-black tracking-[0.5em]">Interactive Presentation</p>
+                    <div className="h-[1px] w-8 bg-white/10" />
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {!loading && (
-        <div className="border-[12px] border-gold min-h-screen overflow-x-hidden relative">
+        <div className="border-[10px] md:border-[16px] border-gold min-h-screen overflow-x-hidden relative flex flex-col">
           <Navbar />
-          <Hero />
-          <PropertyOverview />
-          <STPAnalysis />
-          <MarketingMix />
-          <MarketAnalysis />
-          <ConsumerBehaviour />
-          <DigitalStrategy />
-          <Conclusion />
+          <main className="flex-1">
+            <Hero />
+            <PropertyOverview />
+            <STPAnalysis />
+            <MarketingMix />
+            <PurchaseProcess />
+            <IssuesAndSolutions />
+            <MarketAnalysis />
+            <PresentationAccess />
+            <Conclusion />
+          </main>
 
-          <footer className="py-12 bg-[#0a0a0a] border-t border-white/5 px-8">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-              <div className="flex flex-col items-center md:items-start">
-                <h4 className="text-lg font-heading font-black text-white tracking-tighter mb-1">DUA M <span className="text-gold">RESIDENCES</span></h4>
-                <p className="text-[10px] uppercase font-black tracking-widest text-white/30">Academic Marketing Presentation &copy; 2026</p>
+          <footer className="py-16 bg-[#0a0a0a] border-t border-white/5 px-12 mt-auto">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                <h4 className="text-2xl font-heading font-black text-white tracking-tighter mb-1 uppercase">DUA M <span className="text-gold">RESIDENCES</span></h4>
+                <p className="text-[11px] uppercase font-black tracking-widest text-white/20">EER2253 Principles & Practice of Marketing &copy; 2026</p>
               </div>
-              <div className="h-[1px] md:h-12 w-full md:w-[1px] bg-white/5" />
-              <div className="text-center md:text-right">
-                <p className="text-[9px] uppercase tracking-widest font-black text-white/20">Designed for EER2253</p>
-                <p className="text-xs font-bold text-white/50">Adam Malik • KL-2253-090</p>
+              <div className="h-[1px] md:h-16 w-full md:w-[1px] bg-white/5" />
+              <div className="text-center md:text-right space-y-2">
+                <p className="text-[10px] uppercase tracking-widest font-black text-white/10 uppercase">Strategic Reference Portfolio</p>
+                <div className="flex flex-col gap-1">
+                    <p className="text-xs font-black text-white/40 uppercase tracking-tighter">Adam Malik • Student ID: KL-2253-090</p>
+                    <p className="text-[9px] text-gold/30 font-black uppercase tracking-widest">Property Marketing Assignment</p>
+                </div>
               </div>
             </div>
           </footer>
