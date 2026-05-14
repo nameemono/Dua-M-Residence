@@ -185,6 +185,7 @@ const Navbar = () => {
     { name: 'Issues', href: '#issues' },
     { name: 'Analysis', href: '#market' },
     { name: 'Access', href: '#interactive' },
+    { name: 'Specialist', href: '#specialist' },
   ];
 
   return (
@@ -194,7 +195,7 @@ const Navbar = () => {
     )}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex flex-col">
-          <span className="text-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-0.5 drop-shadow-sm">EER2253 – Marketing Principles</span>
+          <span className="text-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-0.5 drop-shadow-sm">Nazreena Nadia – Real Estate Specialist</span>
           <a href="#home" className="group flex items-center gap-3">
             <div className="w-10 h-10 bg-gold flex items-center justify-center rounded-sm">
               <span className="text-black font-extrabold text-xl font-heading tracking-tighter">DM</span>
@@ -284,7 +285,7 @@ const Hero = () => {
              <h2 className="text-xl md:text-3xl text-white/70 max-w-2xl font-bold font-heading uppercase tracking-tighter leading-tight">
                 Modern Urban Living in Kuala Lumpur
              </h2>
-             <p className="text-gold font-black uppercase tracking-[0.2em] text-xs">EER2253 – Principles & Practice of Marketing</p>
+             <p className="text-gold font-black uppercase tracking-[0.2em] text-xs">Professional Real Estate Marketing Portfolio</p>
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 pt-4">
@@ -292,18 +293,22 @@ const Hero = () => {
               Explore Property
             </a>
             <a href="#stp" className="px-12 py-5 border border-white/20 text-white font-black uppercase tracking-widest text-[11px] rounded-full hover:bg-white/10 transition-all text-center">
-              View Marketing Strategy
+              Marketing Strategy
+            </a>
+            <a href="#interactive" className="group flex items-center justify-center gap-3 px-8 py-5 border border-gold/40 text-gold font-black uppercase tracking-widest text-[11px] rounded-full hover:bg-gold/5 transition-all">
+              <Smartphone size={14} />
+              <span>Scan to View</span>
             </a>
           </div>
 
           <div className="pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="space-y-1">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Student Name</p>
-              <p className="text-white text-sm font-black font-heading uppercase">[Adam Malik]</p>
+              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Professional</p>
+              <p className="text-white text-sm font-black font-heading uppercase">Nazreena Nadia Binti Mohd Nasir</p>
             </div>
             <div className="space-y-1">
-              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Student ID</p>
-              <p className="text-white text-sm font-black font-heading uppercase">[KL-2253-090]</p>
+              <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Registration</p>
+              <p className="text-white text-sm font-black font-heading uppercase">REN 80782</p>
             </div>
             <div className="col-span-2 space-y-1">
               <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Presentation Venue</p>
@@ -791,6 +796,47 @@ const PresentationAccess = () => {
   );
 };
 
+const SpecialistProfile = () => {
+  return (
+    <section id="specialist" className="py-20 bg-white px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-[#0a0a0a] rounded-[3rem] p-12 md:p-20 text-white flex flex-col md:flex-row items-center gap-16 overflow-hidden relative">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(197,160,89,0.1)_0%,transparent_50%)]"></div>
+          
+          <div className="relative z-10 space-y-8 flex-1">
+            <div className="px-6 py-2 border border-gold/30 rounded-full inline-block text-[10px] text-gold font-black uppercase tracking-[0.2em]">Contact Specialist</div>
+            <h2 className="text-5xl md:text-7xl font-heading font-black tracking-tighter uppercase leading-[0.85]">
+              Nazreena Nadia<br />
+              <span className="text-gold">Mohd Nasir</span>
+            </h2>
+            <div className="space-y-4">
+              <p className="text-xl md:text-2xl font-heading font-bold text-white/80 uppercase tracking-tighter">REN 80782 • KLCC & Cyberjaya Specialist</p>
+              <p className="text-sm font-medium text-white/40 max-w-lg leading-relaxed uppercase tracking-tighter">
+                "Turning Dreams into Addresses. Professional in local real estate, dedicated to finding your perfect home or business space."
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap gap-4 pt-4">
+               <a href="mailto:nazreenanadia.n@gmail.com" className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-black uppercase tracking-widest text-[11px] hover:bg-gold transition-colors">
+                  <Mail size={16} />
+                  nazreenanadia.n@gmail.com
+               </a>
+            </div>
+          </div>
+
+          <div className="relative z-10 w-full md:w-1/3 aspect-[4/5] rounded-[2rem] overflow-hidden bg-white/5 border border-white/10 flex flex-col items-center justify-center p-8 text-center group">
+             <div className="w-24 h-24 bg-gold rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <UserCheck size={40} className="text-black" />
+             </div>
+             <p className="text-xs font-black uppercase tracking-[0.2em] mb-2">Verified Agent</p>
+             <p className="text-2xl font-heading font-black text-white uppercase tracking-tighter">REN 80782</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Conclusion = () => {
   return (
     <section id="conclusion" className="relative min-h-[90vh] flex items-center justify-center py-20 px-8 overflow-hidden">
@@ -854,15 +900,15 @@ const Conclusion = () => {
                     <p className="text-gold text-2xl font-black font-heading">#1</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs uppercase font-black tracking-widest opacity-60">Academic Summary</p>
-                  <p className="text-2xl font-black font-heading leading-tight uppercase tracking-tighter">Adam Malik • KL-2253-090</p>
+                  <p className="text-xs uppercase font-black tracking-widest opacity-60">Property Specialist</p>
+                  <p className="text-xl font-black font-heading leading-tight uppercase tracking-tighter">Nazreena Nadia • REN 80782</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-12">
                 <div>
-                  <p className="text-[10px] uppercase font-black tracking-[0.2em] opacity-60 mb-2">Subject</p>
-                  <p className="text-base font-black uppercase tracking-tighter font-heading">EER2253 Principles & Practice of Marketing</p>
+                  <p className="text-[10px] uppercase font-black tracking-[0.2em] opacity-60 mb-2">Expertise</p>
+                  <p className="text-base font-black uppercase tracking-tighter font-heading">Luxury Real Estate Marketing & Sales</p>
                 </div>
                 <div className="text-right flex flex-col items-end">
                   <p className="text-[10px] uppercase font-black tracking-[0.2em] opacity-60 mb-2">Ref Code</p>
@@ -935,6 +981,7 @@ export default function App() {
             <IssuesAndSolutions />
             <MarketAnalysis />
             <PresentationAccess />
+            <SpecialistProfile />
             <Conclusion />
           </main>
 
@@ -947,14 +994,14 @@ export default function App() {
                   </div>
                   <h4 className="text-xl font-heading font-black text-white tracking-tighter uppercase">RESIDENCES</h4>
                 </div>
-                <p className="text-[11px] uppercase font-black tracking-widest text-white/20">EER2253 Principles & Practice of Marketing &copy; 2026</p>
+                <p className="text-[11px] uppercase font-black tracking-widest text-white/20">Real Estate Marketing Specialist &copy; 2026</p>
               </div>
               <div className="h-[1px] md:h-16 w-full md:w-[1px] bg-white/5" />
               <div className="text-center md:text-right space-y-2">
                 <p className="text-[10px] uppercase tracking-widest font-black text-white/10 uppercase">Strategic Reference Portfolio</p>
                 <div className="flex flex-col gap-1">
-                    <p className="text-xs font-black text-white/40 uppercase tracking-tighter">Adam Malik • Student ID: KL-2253-090</p>
-                    <p className="text-[9px] text-gold/30 font-black uppercase tracking-widest">Property Marketing Assignment</p>
+                    <p className="text-xs font-black text-white/40 uppercase tracking-tighter">Nazreena Nadia Binti Mohd Nasir • REN 80782</p>
+                    <p className="text-[9px] text-gold/30 font-black uppercase tracking-widest">Real Estate Specialist Portfolio</p>
                 </div>
               </div>
             </div>
