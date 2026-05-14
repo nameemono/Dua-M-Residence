@@ -195,8 +195,13 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex flex-col">
           <span className="text-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-0.5 drop-shadow-sm">EER2253 – Marketing Principles</span>
-          <a href="#home" className="text-2xl font-heading font-black text-white tracking-tighter leading-none uppercase">
-            DUA M <span className="text-gold">RESIDENCES</span>
+          <a href="#home" className="group flex items-center gap-3">
+            <div className="w-10 h-10 bg-gold flex items-center justify-center rounded-sm">
+              <span className="text-black font-extrabold text-xl font-heading tracking-tighter">DM</span>
+            </div>
+            <span className="text-xl font-heading font-black text-white tracking-tighter leading-none uppercase">
+              RESIDENCES
+            </span>
           </a>
         </div>
 
@@ -898,14 +903,19 @@ export default function App() {
               className="space-y-8 flex flex-col items-center text-center"
             >
               <div className="w-12 h-12 border-t-2 border-gold rounded-full animate-spin mb-6" />
-              <div className="space-y-3">
-                <h2 className="text-4xl font-heading font-black text-white tracking-widest uppercase">
-                  DUA M <span className="text-gold">RESIDENCES</span>
-                </h2>
-                <div className="flex items-center gap-3 justify-center">
-                    <div className="h-[1px] w-8 bg-white/10" />
-                    <p className="text-[10px] text-white/30 uppercase font-black tracking-[0.5em]">Interactive Presentation</p>
-                    <div className="h-[1px] w-8 bg-white/10" />
+              <div className="space-y-4 flex flex-col items-center">
+                <div className="w-20 h-20 bg-gold flex items-center justify-center rounded-xl shadow-[0_0_50px_rgba(197,160,89,0.3)]">
+                  <span className="text-[#0a0a0a] font-black text-5xl font-heading tracking-tighter">DM</span>
+                </div>
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-heading font-black text-white tracking-widest uppercase">
+                    RESIDENCES
+                  </h2>
+                  <div className="flex items-center gap-3 justify-center">
+                      <div className="h-[1px] w-8 bg-white/10" />
+                      <p className="text-[10px] text-white/30 uppercase font-black tracking-[0.5em]">Interactive Presentation</p>
+                      <div className="h-[1px] w-8 bg-white/10" />
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -931,7 +941,12 @@ export default function App() {
           <footer className="py-16 bg-[#0a0a0a] border-t border-white/5 px-12 mt-auto">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
               <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                <h4 className="text-2xl font-heading font-black text-white tracking-tighter mb-1 uppercase">DUA M <span className="text-gold">RESIDENCES</span></h4>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 bg-gold flex items-center justify-center rounded-sm">
+                    <span className="text-black font-extrabold text-sm font-heading tracking-tighter">DM</span>
+                  </div>
+                  <h4 className="text-xl font-heading font-black text-white tracking-tighter uppercase">RESIDENCES</h4>
+                </div>
                 <p className="text-[11px] uppercase font-black tracking-widest text-white/20">EER2253 Principles & Practice of Marketing &copy; 2026</p>
               </div>
               <div className="h-[1px] md:h-16 w-full md:w-[1px] bg-white/5" />
